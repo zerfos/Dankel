@@ -1,0 +1,130 @@
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<link rel="stylesheet" type="text/css" href="/portal/resources/style-guide/css/fluig-style-guide.min.css">
+	<script src="/portal/resources/js/jquery/jquery.js"></script>
+	<script src="/portal/resources/js/jquery/jquery-ui.min.js"></script>
+	<script src="/portal/resources/js/mustache/mustache-min.js"></script>
+	<script src="/portal/resources/style-guide/js/fluig-style-guide.min.js"></script>
+	<style>
+		@import url(https://fonts.googleapis.com/css?family=Kanit:400,200italic);
+		h1  {
+    font-family:'Happy Monkey', cursive !important;
+    font-weight: 400 !important;
+}
+	</style>
+</head>
+<body>
+	<div class="fluig-style-guide">
+	<div class="container">
+	<div class="page-header">
+	<h1 class="text-center">Registro de productos</h1>
+	</div>
+		<form class="form" role="form">
+			
+			<fieldset>
+			<legend>Producto</legend>
+			<div class="form-group">
+			<div  class="row">  
+			<div class="col-md-3  col-sm-3 col-xs-3">
+				<label for="prod_dd_text" class="control-label">Denominación distintiva</label>
+				<input type="text" class="form-control"name= "prod_dd_text" id="prod_dd_text" placeholder="">
+				</div>
+				<div class="col-md-4  col-sm-4 col-xs-4">
+				<label for="prod_dg_text" class="control-label">Denominación genérica</label>
+				<input type="text" class="form-control"name= "prod_dg_text" id="prod_dg_text" placeholder="">
+				</div>
+				<div class="col-md-3  col-sm-3 col-xs-3">
+				<label for="prod_form_farm" class="control-label">Forma Farmaceutica</label>
+				<input type="text" class="form-control"name= "prod_form_farm" id="prod_form_farm" placeholder="">
+				</div>
+				<div class="col-md-2  col-sm-2 col-xs-2">
+				<label for="prod_con_text" class="control-label">Concentración</label>
+				<input type="text" class="form-control"name= "prod_con_text" id="prod_con_text" placeholder="">
+				</div>
+				</div>
+				</div>
+
+			<div class="form-group">
+			<div  class="row">  
+			<div class="col-md-4  col-sm-4 col-xs-4">
+							<label for="prod_cod_int_number" class="control-label">Código interno</label>
+				<input type="text" class="form-control"name= "prod_cod_int_number" id="prod_cod_int_number" placeholder="">
+</div>
+<div class=" col-md-3  col-sm-3 col-xs-3">
+				<label for="doc_sust_text" class="control-label">Sustituye a</label>
+				<input type="text" class="form-control"name= "doc_sust_text" id="doc_sust_text" placeholder="">
+</div>
+<div class=" col-md-3  col-sm-3 col-xs-3">
+				<label for="prod_cond_uso_text" class="control-label">Condición de uso</label>
+				<input type="text" class="form-control"name= "prod_cond_uso_text" id="prod_cond_uso_text" placeholder="">
+
+</div>
+<div class=" col-md-2  col-sm-2 col-xs-2">
+				<label for="prod_cad_number" class="control-label">Periodo de caducidad</label>
+				<div class="input-group">
+           
+				<input type="number" class="form-control"name= "prod_cad_number" id="prod_cad_number" placeholder="">
+				<div class="input-group-addon">meses</div>
+				</div>
+</div>
+				</div>
+				</div>
+				
+			</fieldset>
+
+<fieldset>
+<div class="form-group">
+<div class="row">
+<div class="col-md-4  col-sm-4 col-xs-4">
+        		<label for="doc_reg_text" class="control-label">Registro</label>
+				<input type="text" class="form-control"name= "doc_reg_text" id="doc_reg_text" placeholder="">
+</div>
+<div class="col-md-4  col-sm-4 col-xs-4">
+        		<label for="doc_desc_text" class="control-label"> Documento</label>
+				<input type="text" class="form-control"name= "doc_desc_text" id="doc_desc_text" placeholder="">
+				</div>
+				<div class="col-md-4  col-sm-4 col-xs-4">
+				        		<label for="doc_edic_text" class="control-label">Edición</label>
+				<input type="text" class="form-control"name= "doc_edic_text" id="doc_edic_text" placeholder="">
+			
+ </div>
+
+				
+				</div>
+			</div>
+			</fieldset>
+			<fieldset>
+			<legend>Lista de materias primas y materiales</legend>
+<div>
+
+			<table tablename="registro" id="registro"  addbuttonlabel="Adicionar Registro">
+				<tr >
+					<th >Clave</th>		
+						
+					<th >Descripción</th>	
+					<th >Fórmula</th>		
+					<th >Unidad de Medida</th>	
+					<th >Nota</th>	
+
+				</tr>
+				<tr>
+					<td ><input type="text"  name="id_clave_mat" id="id_clave_mat" class="form-control"></td>
+					
+					<td><input type="text"  name="desc_mat" id="desc_mat" class="form-control"></td>
+					<td><input type="text"  name="formu_text" id="formu_text" class="form-control"></td>
+					<td><input type="text"  name="UM_text" id="UM_text" class="form-control"></td>
+				<td><input type="text"  name="nota_text" id="nota_text" class="form-control"></td>
+					
+
+
+				</tr>
+			</table>
+</div>
+</fieldset>
+		</form>
+	</div>
+	</div>
+</body>
+
+</html>

@@ -1,0 +1,36 @@
+
+=====================================NAVEGACION=========================================
+OP
+	#field_lista -DETALLES
+	#field_calculo Calculo
+	#field_cualicuantitativo Formula cualicuantitativa
+
+	
+
+
+
+mezclado
+	
+	Pesado y surtido
+	Revision y verificación 
+	Proceso de mezclado
+	Rendimiento
+
+
+Dosificado
+
+	Esterilización
+	Proceso dosificado
+	Rendimiento
+
+
+Acondicionamiento
+
+
+
+
+======================TERMINA NAVEGACION ====================================================
+
+
+
+

@@ -1,0 +1,144 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="/portal/resources/style-guide/css/fluig-style-guide.min.css">
+<script src="/portal/resources/js/jquery/jquery.js"></script>
+<script src="/portal/resources/js/jquery/jquery-ui.min.js"></script>
+<script src="/portal/resources/js/mustache/mustache-min.js"></script>
+<script src="/portal/resources/style-guide/js/fluig-style-guide.min.js"></script>
+
+</head>
+<body>
+<div class="fluig-style-guide">
+<form name="form" role="form">
+
+<div >
+	
+<fieldset id="cuadroInfo">
+
+	<input id="denom_dist" name="denom_dist"></input>
+	<input id="fecha_fab" name="fecha_fab"></input>
+	<input id="no_lote" name="no_lote"></input>
+	<input id="denom_gen" name="denom_gen"></input>
+	<input id="periodo_cad" name="periodo_cad"></input>
+	<input id="no_orden" name="no_orden"></input>
+	<input id="forma_farma" name="forma_farma"></input>
+	<input id="fecha_cad" name="fecha_cad"></input>
+	<input id="registro" name="registro"></input>
+	<input id="concentracion" name="concentracion"></input>
+	<input id="fecha_emi" name="fecha_emi"></input>
+	<input id="cod_interno" name="cod_interno"></input>
+	<input id="sustituye" name="sustituye"></input>
+	<input id="tamanio_lote" name="tamanio_lote"></input>
+	<input id="cond_uso" name="cond_uso"></input>
+	<input id="num_OP_protheus" name="num_OP_protheus"></input>
+	<input id="fecha_actual" name="fecha_actual"></input>
+
+</fieldset>
+<fieldset id="cuadroFirmas_OP">
+
+	<input id="cf_emisor_grupo" name="cf_emisor_grupo"></input>
+	<input id="cf_id_emisor" name="cf_id_emisor"></input>
+	<input id="cf_nombre_emisor" name="cf_nombre_emisor"></input>
+	<input id="cf_date_emisor" name="cf_date_emisor"></input>
+
+	
+	<input id="cf_revisor_grupo" name="cf_revisor_grupo"></input>
+	<input id="cf_id_revisor" name="cf_id_revisor"></input>
+	<input id="cf_nombre_revisor" name="cf_nombre_revisor"></input>
+	<input id="cf_date_revisor" name="cf_date_revisor"></input>
+
+	<input id="cf_autorizador_grupo" name="cf_autorizador_grupo"></input>
+	<input id="cf_id_autorizador" name="cf_id_autorizador"></input>
+	<input id="cf_nombre_autorizador" name="cf_nombre_autorizador"></input>
+	<input id="cf_date_autorizador" name="cf_date_autorizador"></input>
+
+
+</fieldset>
+
+<button class="btn btn-primary btn-lg" data-open-modal="">
+    Launch modal
+</button>
+
+
+
+<input id="notas" name="notas"></input>
+
+
+
+</div>
+<div class="container">
+<div id="sampleArea"></div>
+</div>
+</form>
+
+</div>
+
+<div id="template"></div>
+
+</body>
+
+<script>
+var data={id:"a"};
+
+$( "#template" ).load( "templates/template1.html", function() {
+
+	  var template = $('#tmp1').html();
+		console.warn(template);
+
+		var html = Mustache.to_html(template, data);
+		$('#sampleArea').html(html);
+
+	});
+	
+	$(document).ready(function(){
+		var $inputsG=$("body").find("input .sim");
+		
+		$("body").on("change",".sim",function(){
+
+			var idInput=$(this).attr("data-target");
+			var value=$(this).val();
+			$("#"+idInput).val(value);
+
+		});
+		
+	});
+
+var myModal ;
+var $params;
+$("button").click(function(){
+
+
+		 myModal = FLUIGC.modal({
+    title: 'Title',
+    content: '<h1>Modal Content</h1> <input/><label></label><input/>',
+    id: 'fluig-modal',
+    actions: [{
+        'label': 'Salvar',
+        'bind': 'data-open-modal',
+    },{
+        'label': 'Close',
+        'autoClose': true
+    }]
+}, function(err, data) {
+    if(err) {
+        // do error handling
+    } else {
+    	
+       
+    }
+});
+
+});
+	$("body").on("click","button['data-open-modal']",function(){
+	
+	
+	
+	});
+		
+
+</script>
+
+<!--Titulo-->
+
+
+</html>

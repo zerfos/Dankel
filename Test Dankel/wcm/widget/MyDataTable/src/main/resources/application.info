@@ -1,0 +1,13 @@
+application.type=widget
+application.code=MyDataTable
+application.title=MyDataTable
+application.description=MyDataTable
+application.category=SYSTEM
+application.renderer=freemarker
+developer.code=QROFLUIG01
+developer.name=jorge.robledo
+developer.url=http://www.fluig.com
+application.uiwidget=true
+view.file=view.ftl
+edit.file=edit.ftl
+

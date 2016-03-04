@@ -1,0 +1,99 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="/portal/resources/style-guide/css/fluig-style-guide.min.css">
+<script src="/portal/resources/js/jquery/jquery.js"></script>
+<script src="/portal/resources/js/jquery/jquery-ui.min.js"></script>
+<script src="/portal/resources/js/mustache/mustache-min.js"></script>
+<script src="/portal/resources/style-guide/js/fluig-style-guide.min.js"></script>
+</head>
+<body>
+<div class="fluig-style-guide">
+        <form class="form">
+        	
+<div class="container">
+  <div id="enabled"><form role="form">
+    <div class="form-group">
+        <label for="exampleInputEmail1">Email address</label>
+        <input name="ab" id="ab" type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Password</label>
+        <input name="a" id="a" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputFile">File input</label>
+        <input name="a1" id="a1" type="file" id="exampleInputFile">
+        <p class="help-block">Example block-level help text here.</p>
+    </div>
+    <div class="checkbox">
+        <label>
+        <input name="a12" id="a12" type="checkbox"> Check me out
+        </label>
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+</form></div>
+     <div id="disabled">
+<form role="form">
+    <div class="form-group">
+        <label for="exampleInputEmail1">Email address</label>
+        <input name="a123" id="a123" type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Password</label>
+        <input name="a1234" id="a1234" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputFile">File input</label>
+        <input name="a12345" id="a12345" type="file" id="exampleInputFile">
+        <p class="help-block">Example block-level help text here.</p>
+    </div>
+    <div class="checkbox">
+        <label>
+        <input name="a1234567" id="a1234567" type="checkbox"> Check me out
+        </label>
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+</form>
+</div>
+</div>
+<script>
+$("#disabled").addClass("fs-transparent-75");
+$("#disabled").find("input").each(function(){
+
+var type= $(this).attr("type");
+switch(type){
+  case "text":
+  case "textarea":
+  case "number":
+  case "email":
+  case "password":
+          $(this).attr("readonly","");
+break;
+
+  case "file":
+         $(this).click(function(event){
+              event.preventDefault();
+        });
+       break;
+  case "checkbox":
+
+       $(this).addClass("hide");
+       break;
+default:
+
+
+
+
+}
+
+$("#disabled").find("button").each(function(){
+  $(this).click(function(event){
+              event.preventDefault();
+        });
+});
+
+});
+
+</script>
+</body>
+</html>

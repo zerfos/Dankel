@@ -1,0 +1,3701 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Orden de Producción</title>
+
+<!-- 
+ ////////////////////////////////////////////
+		 Autor:Jorge Robledo González
+		Version :3.001
+		Fecha: 20/10/2015
+		Titulo: Orden de producción
+		Tipo : Desarrollo        
+////////////////////////////////////////////////
+
+-->
+<link rel="stylesheet" type="text/css" href="/portal/resources/style-guide/css/fluig-style-guide.min.css">
+<script src="/portal/resources/js/jquery/jquery.js"></script>
+<script src="/portal/resources/js/jquery/jquery-ui.min.js"></script>
+<script src="/portal/resources/js/mustache/mustache-min.js"></script>
+<script src="/portal/resources/style-guide/js/fluig-style-guide.min.js"></script>
+<!--  <script type="text/javascript" src="../vcXMLRPC-mobile.js"></script>-->
+<script type="text/javascript" src="/webdesk/vcXMLRPC-mobile.js"></script>
+<script type="text/javascript" src="modalTest.js"></script>
+<script type="text/javascript" src="muestrasTablas.js"></script>
+<style type="text/css">
+
+
+
+</style>
+</head>
+<body>
+	<div class="fluig-style-guide">
+		<div class="container">
+
+			<div class="test"id="nav">
+
+
+				<div class="media">
+					<a class="pull-left" href="#">
+						<img class="image-responsive" src="http://test.dankel.fluig.com:1201/portal/resources/images/1/logo_image.png" height="150">
+					</a>
+					<div class="media-body">
+
+						<h2 class="text-center media-middle"><b>PRODUCTO NORDANK</b></h2>
+						<h4 class="text-center media-middle"><b>Orden de producción</b></h4>
+
+					</div>
+				</div>
+			</div>
+			<hr>
+
+
+			<form name="form" role="form">
+				<div class="hide">
+					<label for="controlForm" class="control-label">ControlForm</label>
+					<input type="number" class="form-control"name= "controlForm" id="controlForm" placeholder="">
+				</div>	
+
+				<div class="row">
+					<ul class="nav nav-tabs nav-justified clearfix" role="tablist">
+
+						<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">
+							Orden de producción <span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a data-toggle="tab" href="#field_lista">Detalles</a></li>
+
+							<li><a href="#field_calculo" role="tab" data-toggle="tab">Cálculo de Principio Activo</a></li>
+							<li><a href="#field_cualicuantitativo" role="tab" data-toggle="tab">Fórmula Cualicuantitativa</a></li>
+						</ul>
+
+					</li>
+					<li><a data-toggle="tab" href="#fieldMezclado">Mezclado  </a></li>
+
+					<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Proceso Dosificado<span class="caret"></span></a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a data-toggle="tab" href="#fieldEsterilizacion">Esterilización de ampolleta y herramiental</a></li>
+
+							<li><a href="#fieldDosificado" role="tab" data-toggle="tab">Dosificado </a></li>
+							
+						</ul>
+
+					</li>
+					<li><a href="#field_Balance" role="tab" data-toggle="tab">Balance producto a granel</a></li>
+				</ul>
+			</div>
+			<hr/>
+			<div class="productDesc">
+				<div class="hide">
+					<label for="nom_den_dist"  >Denominación distintiva</label>
+					<label for= "nom_den_gene" >Denominación generica</label>
+					<label for= "nom_for_farm" >Forma farmaceutica</label>
+					<label for= "nom_conc_lote" >Concentración</label>
+					<label for= "nom_sustituye" >Sustituye a </label>
+
+					<input type="text" id="nom_den_dist" name="nom_den_dist" value="Nordank">
+					<input type="text" id="nom_den_gene" name="nom_den_gene" value="Norepinefrina">
+					<input type="text" id="nom_for_farm" name="nom_for_farm" value="Solución">
+					<input type="text" id="nom_conc_lote" name="nom_conc_lote" value="4 mg / 4 mL">
+					<input type="text" id="nom_sustituye" name="nom_sustituye" value="41135005 A">                    
+
+					<label for= "nom_fec_fabr" >Fecha de fabricación</label>
+					<label for= "nom_per_cadu" >Periodo de caducidad</label>
+					<label for= "date_fec_cadu" >Fecha de caducidad</label>
+					<label for= "date_fec_emis" >Fecha de emisión</label>
+					<label for= "num_tam_lote" >Tamaño de lote</label>
+					<input type="text" id="nom_fec_fabr" name="nom_fec_fabr" value="">
+					<input type="text" id="nom_per_cadu" name="nom_per_cadu" value="24 meses">
+					<input type="text" id="date_fec_cadu" name="date_fec_cadu" value="MAY-17">
+					<input type="text" id="date_fec_emis" name="date_fec_emis" value="14-MAY-15">
+					<input type="text" id="num_tam_lote" name="num_tam_lote" value="13,747 piezas">
+
+					<label for= "nom_no_lote" >No de lote</label>
+					<label for= "num_no_orde" >No de orden</label>
+					<label for= "nom_reg_lote" >Registro</label>
+					<label for= "nom_cod_inte" >Código interno</label>
+					<label for= "nom_cond_uso" >Condición de uso </label>
+
+					<input type="text" id="nom_no_lote" name="nom_no_lote" value="">
+					<input type="number" id="num_no_orde" name="num_no_orde" value="">
+					<input type="text" id="nom_reg_lote" name="nom_reg_lote" value="">
+					<input type="text" id="nom_cod_inte" name="nom_cod_inte" value="">
+					<input type="text" id="nom_cond_uso" name="nom_cond_uso" value="">
+				</div>
+
+				<div class="row">
+
+					<div class="tableResult"></div>
+				</div>
+
+
+			</div>
+
+			<hr/>
+
+			<!-- Tab panes -->
+			<div class="tab-content">
+
+				<div class="tab-pane" id="field_cualicuantitativo">
+					CUADRO DE FIRMAS (PRESELECIONADO)
+
+
+					<h2>FORMULA CUALICUANTITATIVA </h2>
+
+					<p>Cada 4 mL de solución contienen:</p>
+					<div class="row">
+						<div class="col-md-4  col-sm-4 col-xs-4">
+
+							<p>Bitrartrato de Norepinefrina monohidratada</p>
+						</div>
+						<div class="col-md-8  col-sm-8 col-xs-8">
+
+							<p>7.9745 mg</p>
+						</div>
+						<div class="col-md-4  col-sm-4 col-xs-4">
+
+							<p>Excipiente cbp</p>
+						</div>
+						<div class="col-md-8  col-sm-8 col-xs-8">
+
+							<p>4.0 mL</p>
+						</div>
+
+					</div>
+				</div>
+<div class="tab-pane" id="fieldEsterilizacion">					
+
+
+
+<button class="btn btn-default showModal" data-target="control_proceso">Adicionar muestra</button>
+<table tablename="control_proceso" id="control_proceso"  nodeletebutton=true addbuttonlabel="Adicionar Registro">
+
+
+	<tr >
+		<th >Fecha</th>
+		<th >Hora</th>
+		<th >Muestra 1 (g)</th>
+		<th >Muestra 2 (g)</th>
+		<th >Muestra 3 (g)</th>
+		<th >Promedio (g)</th>
+		
+	</tr>
+
+	<tr>
+		<td >
+			<input type="text" data-type="contador" name="date_cont_proceso" id="date_cont_proceso" class="form-control">
+		</td>
+		<td >
+			<input type="text" name="time_cont_proceso" id="time_cont_proceso" class="form-control">
+		</td>
+		<td>
+			<input type="number" name="number_ctrl_muestra1" id="number_ctrl_muestra1" class="form-control" >
+		</td>
+				<td>
+			<input type="number" name="number_ctrl_muestra2" id="number_ctrl_muestra2" class="form-control" >
+		</td>
+				<td>
+			<input type="number" name="number_ctrl_muestra3" id="number_ctrl_muestra3" class="form-control" >
+		</td>
+				<td>
+			<input type="number" name="number_ctrl_prom" id="number_ctrl_prom" class="form-control" >
+		</td>
+	</tr>
+
+</table>
+</div>
+<div class="tab-pane" id="fieldDosificado">
+<div class="informacion">
+	Para el ajuster del equipo de dosificado , se obtienen de 10 ampolletas con producto y se coloca en la jeringa hipodérmica la solución, se pesa, obteniéndose el peso bruto del producto dosificado; se le resta la tara de la jeringa , para obtener el peso neto del producto difificado, el cual debe ser mayor o igual del peso en gramos del punto anterior
+
+</div>
+<button class="btn btn-default showModal" data-target="lista_muestra">Adicionar muestra</button>
+<table tablename="lista_muestra" id="lista_muestra"  nodeletebutton=true addbuttonlabel="Adicionar Lote">
+
+
+	<tr >
+		<th >Muestra</th>
+		<th >Peso Bruto(g)</th>
+		<th >Peso Neto(g)</th>
+		
+	</tr>
+
+	<tr>
+		<td >
+			<input type="number" data-type="contador" name="textMuestra" id="textMuestra" class="form-control">
+		</td>
+		<td >
+			<input type="number" name="PesoBruto" id="PesoBruto" class="form-control">
+		</td>
+		<td>
+			<input type="number" name="PesoNeto" id="PesoNeto" class="form-control" >
+		</td>
+		
+	</tr>
+
+</table>
+</div>
+
+				<div class="tab-pane" id="field_calculo">
+
+					<div class="panel-group" id="accordionPA" role="tablist" aria-multiselectable="true"> 
+						<div class="panel panel-success"> 
+							<div class="panel-heading" role="tab" id="heading2"> 
+								<h4 class="panel-title"> 
+									<div class="row"> 
+										<div class="col-md-1 col-sm-1 col-xs-1"> 
+											<a class="fluigicon fluigicon-info-sign" role="button" rel="popover" data-title="Info" data-content="Lotes de principio activo utilizados" data-placement="top">
+											</a> 
+										</div> 
+										<div class="col-md-11 col-sm-11 col-xs-11"> 
+											<a role="button" data-toggle="collapse" data-parent="#accordionPA" href="#collapse2" aria-expanded="true" aria-controls="collapse2" > 
+												<div class="row"> 
+													<div class="col-md-1 col-sm-1 col-xs-1"> 
+
+													</div> 
+													<div class="col-md-7 col-sm-7 col-xs-7"> Cálculo Principio Activo 
+													</div> 
+													<div class="col-md-3 col-sm-3 col-xs-3"> 
+													</div> 
+												</div> 
+
+
+											</a> 
+										</div> 
+									</div>
+								</h4> 
+							</div> 
+							<div id="collapse2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading2"> 
+								<div class="panel-body"> 
+									<div class="detalle"> 
+										<div class="cuadroDescriptivo well well-lg "> 
+											<div class="row"> 
+												<div class="col-md-1"> 
+													<h4 class="text-left">1
+														<small>er
+														</small> Lote
+													</h4> 
+												</div> 
+												<div class="col-md-2"> 
+													<label for="CPA_LOTE1" class="label-control"> No. de lote del Principio activo 
+													</label> 
+												</div> 
+												<div class="col-md-2"> 
+													<div class="input-group dsKey"> 
+
+
+																	<!--<input 		type="zoom"			class="form-control"		name="colleague_zoom1" 	id="colleague_zoom1"
+																	data-zoom="{		    'datasetId':'ds_PA',		    'fields':[		        {		            'field':'PA',		            'label':'Producto Activo'		        },{		            'field':'ValoracionPorcentual',		            'label':'Valoración %', 		            'standard':'true',		            'search':'true'		        }		    ]		}" />-->
+
+
+																</div> 
+															</div> 
+															<div class="col-md-1"> 
+																<label for="CPA_fec_cadLote1"> Fecha de caducidad 
+																</label> 
+															</div> 
+															<div class="col-md-2"> 
+																<input readonly="true" class="form-control" id="CPA_fec_cadLote1" name="CPA_fec_cadLote1" type="date"> 
+															</div> 
+															<div class="col-md-2"> 
+																<label class="label-control"> Valoración 
+																</label> 
+															</div> 
+															<div class="col-md-2"> 
+																<div class="input-group"> 
+																	<input readonly="true" class="form-control" id="CPA_num_valLote1" name="CPA_num_valLote1" type="number"> 
+																	<span class="input-group-addon">%
+																	</span> 
+																</div> 
+															</div> 
+														</div> 
+													</div> 
+													<div id="Lote2" class="cuadroDescriptivo well well-lg hide"> 
+														<div class="row"> 
+															<div class="col-md-1"> 
+																<h4 class="text-left">2
+																	<small>do
+																	</small> Lote
+																</h4> 
+															</div> 
+															<div class="col-md-2"> 
+																<label for="CPA_LOTE2" class="label-control"> No. de lote del Principio activo 
+																</label> 
+															</div> 
+															<div class="col-md-2"> 
+																<div class="input-group"> 
+																	<!--<input 	type="zoom"	 class="form-control" name="colleague_zoom2"  id="colleague_zoom2" 
+																	data-zoom="{ 'datasetId':'colleague', 'fields':[ { 'field':'colleagueId', 'label':'ID'},{ 'field':'colleagueName', 'label':'Nome', 'standard':'true','search':'true'}] }" />-->
+																	<div class="input-group-addon">
+																		<span class="fluigicon fluigicon-search ">
+																		</span>
+																	</div> 
+																</div> 
+															</div> 
+															<div class="col-md-1"> 
+																<label for="CPA_fec_cadLote2"> Fecha de caducidad 
+																</label> 	
+															</div> 
+															<div class="col-md-2"> 
+																<input readonly="true" class="form-control" id="CPA_fec_cadLote2" name="CPA_fec_cadLote2" type="date"> 
+															</div> 
+															<div class="col-md-2"> 
+																<label class="label-control" for="CPA_num_valLote2"> Valoración 
+																</label> 
+															</div> 
+															<div class="col-md-2"> 
+																<div class="input-group"> 
+																	<input readonly="true" class="form-control" id="CPA_num_valLote2" name="CPA_num_valLote2" type="number"> 
+																	<span class="input-group-addon">%
+																	</span> 
+																</div> 
+															</div> 
+														</div> 
+													</div>
+													<button role="button" class="btn btn-default adicionarLote"></button>
+
+												</div> 
+												<div  class="instrucciones text-center"> 
+													<ol> 
+														<li> 
+															<p>Cada 4 mL de solución inyactable contrienen 7.9745 mg de Bitartrato de Norepinefrina al 100% de contenido
+															</p> 
+															<div class="formula"> 
+																<p>7.9745 mg -------------100%
+																</p> 
+																<p>X1 mg -------------(a)
+																</p> 
+																<p>X1: 
+																	<span ><input id="CPA1LoteCalculo1" name="CPA1LoteCalculo1" readonly class="calculo"></span> mg de Bitrartrato de norepinefrina
+																</p> 
+															</div> 
+														</li> 
+														<li>
+															<p>Cada 4 mL de solución inyectable contienen (b)<input id="CPA1LoteCalculo2" name="CPA1LoteCalculo2" type="text"/> mg de Bitartrato de </p>
+															<p>norepinefrina:</p>
+															<div class="formula">
+																<p>(b) <var data-target="CPA1LoteCalculo2"></var> mg______4mL</p>
+																<p>X2 mg--------------56.500mL</p>
+																<p>X2 /1000=<input id="CPA1LoteCalculo3" name="CPA1LoteCalculo3" readonly class="calculo"/ > g de Bitrartrato de norepindefrina para 56.5 kg de fabricación.</p>
+
+
+															</div>
+
+
+														</li>
+													</ol> 
+												</div> 
+
+												<div class="instrucciones text-center hide"> 
+													<fieldset>
+														<legend class="text-left">1<small>er Lote</small></legend>
+														<ol>
+															<li>
+																<p>Cada 4 ML de solución inyectable contienen <span data-target="cantidadPA"></span>  al 100% de contenido</p>
+																<div class="formula text-center"> 
+																	<p>7.9745 mg -------------100%
+																	</p> 
+																	<p>X1 mg -------------(a)
+																	</p> 
+																	<p>X1: 
+																		<span ><input id="CPA2LoteCalculo1" name="CPA2LoteCalculo1" readonly ></span> mg de Bitrartrato de norepinefrina
+																	</p> 
+																</div> 
+
+															</li>
+															<li>
+																<p>Cada 4 mL de solución inyectable contienen (b)<span data-target="CPA2LoteCalculo1"></span> mg de Bitartrato de norepinefrina</p>
+																<div class="formula text-center"> 
+																	<p>7.9745 mg -------------100%
+																	</p> 
+																	<p>X2 mg -------------(a)
+																	</p> 
+																	<p>X2: 
+																		<span ><input id="CPA2LoteCalculo2" name="CPA2LoteCalculo2" readonly ></span> mg de Bitrartrato de norepinefrina
+																	</p> 
+
+																	<p>X2 / 1000=<input id="CPA2LoteCalculo3" name="CPA2LoteCalculo3" readonly>g de Bitartrato de norepinefrina para 56.5kg de fabricación(c)</p>
+
+
+																</div>
+																<p>c=<input name="CPA2LoteCalculo4" id="CPA2LoteCalculo4" />g</p>
+																<p>Cantidad disponible(cd)= <input name="CPA2LoteCalculo5" id="CPA2LoteCalculo5" />g</p>
+																<p>Diferencia(c-cd)= <input name="CPA2LoteCalculo6" id="CPA2LoteCalculo6" />g(e)</p>
+																<p>Por adicionar(e) =<input name="CPA2LoteCalculo7" id="CPA2LoteCalculo7" />g</p>
+															</li>
+
+														</ol>
+													</fieldset>
+													<fieldset>
+														<legend class="text-left">2<small>do</small> Lote</legend>
+														<p>No. de Lote<span data-target="CPA_LOTE2"></span></p>
+														<p>Valoración (d) <span data-target=""></span>%</p>
+														<div class="formula text-center">
+															<p>(e)<span></span>------------->(d)<span></span>%</p>
+															<p>X'------------>100 %</p>
+															<p>X'------------>100 %</p>
+														</div>
+														<h4>A surtir</h4>
+														<p>No de lote: Cantidad(cd)</p>
+														<p>No de lote: Cantidad(cd)</p>
+														<p>Cantidad total de Bitrartrato de norepinefruna para 60 kg de fabricación(cd + X') <input type="text" id="CPAcantidadTotal" name="CPAcantidadTotal"></p>
+													</fieldset>
+
+
+
+
+
+												</div>
+
+
+												<div class="autorizacion fs-md-space">
+													<label for="idGrupoCPA" class="control-label">Id grupo</label>
+													<input type="text" class="form-control"name= "idGrupoCPA" id="idGrupoCPA" placeholder="">
+													<label for="name_RealizoCAP" class="control-label">Realizó CPA</label>
+													<input type="text" class="form-control"name= "name_RealizoCAP" id="name_RealizoCAP" placeholder="">
+													<label for="date_RealizoCAP" class="control-label">Fecha Realizó CPA</label>
+													<input type="text" class="form-control"name= "date_RealizoCAP" id="date_RealizoCAP" placeholder="">
+
+													<label for="name_VerificoCAP" class="control-label">Verificó CPA</label>
+													<input type="text" class="form-control"name= "name_VerificoCAP" id="name_VerificoCAP" placeholder="">
+													<label for="date_VerificoCAP" class="control-label">Fecha Verificó CPA</label>
+													<input type="text" class="form-control"name= "date_VerificoCAP" id="date_VerificoCAP" placeholder="">
+
+
+													<div class="row clearfix"> 
+														<div class="col-sm-6 col-md-6"> 
+															<div class="thumbnail btn btn-default modal-call" data-result="name_RealizoCAP" data-target="idGrupoCPA"> 
+																<div class="caption text-center"> <h3>Realizó </h3> <p data-result="name_RealizoCAP">... </p><p data-date=""></p> 
+																</div> 
+															</div> 
+														</div> 
+														<div class="col-sm-6 col-md-6"> 
+															<div class="thumbnail btn btn-default modal-call" data-result="name_VerificoCAP" data-target="idGrupoCPA"> 
+																<div class="caption text-center"> <h3>Verificó</h3> <p data-result="name_VerificoCAP">... </p> <p data-date=""></p>
+																</div> 
+															</div> 
+														</div> 
+													</div> 
+													<label for="text_obsCPA" class="control-label">Observaciones</label>
+													<textarea id="text_obsCPA" name="text_obsCPA" class="form-control"></textarea>
+												</div>
+											</div> 
+										</div> 
+									</div> 
+									<div class="panel panel-default"> 
+										<div class="panel-heading" role="tab" id="heading3"> 
+											<h4 class="panel-title"> 
+												<div class="row"> 
+													<div class="col-md-1 col-sm-1 col-xs-1"> 
+														<a class="fluigicon fluigicon-info-sign" role="button" rel="popover" data-title="Info" data-content="" data-placement="top">
+														</a> 
+													</div> 
+													<div class="col-md-11 col-sm-11 col-xs-11"> 
+														<a role="button" data-toggle="collapse" data-parent="#accordionPA" href="#collapse3" aria-expanded="true" aria-controls="collapse3" > 
+															<div class="row"> 
+																<div class="col-md-1 col-sm-1 col-xs-1"> 
+																	<span class="arrow">
+																	</span> 
+																</div> 
+																<div class="col-md-7 col-sm-7 col-xs-7"> Resultado principio activo 
+																</div> 
+																<div class="col-md-3 col-sm-3 col-xs-3"> 
+																</div> 
+															</div> 
+
+														</a> 
+													</div> 
+												</div>
+											</h4> 
+										</div> 
+										<div id="collapse3" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading3"> 
+											<div class="panel-body"> 
+											</div> 
+										</div> 
+									</div> 
+								</div> 
+
+
+							</div> 
+<!-- 
+
+<div class="thumbnail btn btn-default modal-call " data-target="realizo_teste" > 
+<div class="caption text-center"> 
+
+
+-->
+
+<div class="tab-pane" id="field_lista">
+	<div class="panel-group" id="accordionPAres" role="tablist" aria-multiselectable="true"> 
+		<div class="panel panel-info"> 
+			<div class="panel-heading" role="tab" id="Notas"> 
+				<h4 class="panel-title"> 
+					<div class="row"> 
+						<div class="col-md-1 col-sm-1 col-xs-1"> 
+							<a class="fluigicon fluigicon-info-sign" role="button" rel="popover" data-title="Info" data-content="" data-placement="top">
+							</a> 
+						</div> 
+						<div class="col-md-11 col-sm-11 col-xs-11"> 
+							<a role="button" data-toggle="collapse" data-parent="#accordionPAres" href="#collapseAutorizacion" aria-expanded="true" aria-controls="collapseAutorizacion" > 
+								<div class="row"> 
+									<div class="col-md-1 col-sm-1 col-xs-1"> 
+										<span class="arrow">
+										</span> 
+									</div> 
+									<div class="col-md-7 col-sm-7 col-xs-7"> Autorización
+									</div> 
+									<div class="col-md-3 col-sm-3 col-xs-3"> 
+									</div> 
+								</div> 
+
+							</a> 
+						</div> 
+					</div>
+				</h4> 
+			</div> 
+		</div>
+
+		<div id="collapseAutorizacion" class="panel-collapse collapse" role="tabpanel" aria-labelledby="NoAutorizacióntas"> 
+			<div class="panel-body"> 
+
+				<div class="autorizacion">
+					<div class="hide">
+						<label for="reviso_group" class="control-label">Grupo</label>
+						<input type="text" class="form-control"name= "reviso_group1" id="reviso_group1" placeholder="placeholder">
+						<label for="reviso_name" class="control-label">labelName</label>
+						<input type="text" class="form-control"name= "reviso_name1" id="reviso_name1" placeholder="placeholder">
+						<label for="superviso_teste" class="control-label">labelName</label>
+						<input type="text" class="form-control"name= "superviso_teste1" id="superviso_teste1" placeholder="placeholder">
+						<label for="verifico_teste" class="control-label">labelName</label>
+						<input type="text" class="form-control"name= "verifico_teste1" id="verifico_teste1" placeholder="placeholder">
+					</div>
+					<fieldset>
+						<div class="row clearfix"> 
+
+							<div class="col-sm-4 col-md-4"> 
+								<div class="thumbnail btn btn-default modal-call " data-target="reviso_group" data-result="reviso_name" > 
+									<div class="caption text-center"> 
+										<h3>Emitió
+										</h3> 
+										<p data-result="reviso_name">...
+										</p> 
+										<span>Administración
+										</span> 
+
+
+									</div> 
+								</div> 
+							</div> 
+							<div class="col-sm-4 col-md-4"> 
+								<div class="thumbnail btn btn-default modal-call "  data-target="reviso_group" data-result="reviso_name"> 
+									<div class="caption text-center"> 
+										<h3>Reviso
+										</h3> 
+										<p data-result="reviso_name">...
+										</p> 
+										<p>Aseguramiento de la Calidad
+										</p> 
+
+									</div> 
+								</div> 
+							</div> 
+							<div class="col-sm-4 col-md-4"> 
+								<div class="thumbnail btn btn-default modal-call"  data-target="verifico_teste"> 
+									<div class="caption text-center"> 
+										<h3>Autorizó
+										</h3> 
+										<p data-result="reviso_name">...
+										</p> 
+										<p>Responsable Sanitario
+										</p> 
+
+									</div> 
+								</div> 
+							</div> 
+						</div>
+					</fieldset>
+				</div> 
+
+			</div>
+		</div>
+
+		<div class="panel panel-info"> 
+			<div class="panel-heading" role="tab" id="Notas"> 
+				<h4 class="panel-title"> 
+					<div class="row"> 
+						<div class="col-md-1 col-sm-1 col-xs-1"> 
+							<a class="fluigicon fluigicon-info-sign" role="button" rel="popover" data-title="Info" data-content="" data-placement="top">
+							</a> 
+						</div> 
+						<div class="col-md-11 col-sm-11 col-xs-11"> 
+							<a role="button" data-toggle="collapse" data-parent="#accordionPAres" href="#collapseListaMateriales" aria-expanded="true" aria-controls="collapseListaMateriales" > 
+								<div class="row"> 
+									<div class="col-md-1 col-sm-1 col-xs-1"> 
+										<span class="arrow">
+										</span> 
+									</div> 
+									<div class="col-md-7 col-sm-7 col-xs-7"> Lista de materiales
+									</div> 
+									<div class="col-md-3 col-sm-3 col-xs-3"> 
+									</div> 
+								</div> 
+
+							</a> 
+						</div> 
+					</div>
+				</h4> 
+			</div> 
+		</div>
+
+		<div id="collapseListaMateriales" class="panel-collapse collapse" role="tabpanel" aria-labelledby="Lista de materiales"> 
+			<div class="panel-body"> 
+				<div class="form-input">
+				
+					<table tablename="lista_productos" width="100%" cellspacing="0" id="lista_calcular" addbuttonlabel="Adicionar Lote">
+
+
+						<tr >
+							<th class="col-md-3  col-sm-3 col-xs-3">Clave</th>
+							<th >Lote</th>
+							<th >Descripción</th>
+							<th >Fórmula</th>
+							<th >Cantidad Surtida</th>
+							<th >UM</th>
+							<th >No. de Análisis</th>
+							<th >Estado</th>
+						</tr>
+
+						<tr>
+							<td >
+								<input type="text" data-type="contador" name="text_claveProduc" id="text_claveProduc" class="form-control">
+							</td>
+							<td width="150">
+								<input type="text" name="cliente1" id="cliente1" class="form-control">
+							</td>
+							<td>
+								<input type="text" name="horario" id="horario" class="form-control" >
+							</td>
+							<td>
+								<input type="text" name="cliente2" id="cliente2" class="form-control">
+							</td>
+							<td>
+								<input type="text" name="valor" id="valor" class="form-control">
+							</td>
+							<td>
+								<input type="text" name="projeto1" id="projeto1" class="form-control">
+							</td>
+							<td>
+								<input type="text" name="projeto2" id="projeto2" class="form-control">
+							</td>
+							<td>
+								<input type="text" name="projeto3" id="projeto3" class="form-control">
+							</td>
+						</tr>
+
+					</table>
+
+					<label for="nom_notas" class="control-label">Notas
+					</label> 
+					<textarea id="nom_notas" name="nom_notas" class="form-control"></textarea>
+				</div>
+
+			</div>
+		</div>
+		<div class="panel panel-info"> 
+			<div class="panel-heading" role="tab" id="Notas"> 
+				<h4 class="panel-title"> 
+					<div class="row"> 
+						<div class="col-md-1 col-sm-1 col-xs-1"> 
+							<a class="fluigicon fluigicon-info-sign" role="button" rel="popover" data-title="Info" data-content="" data-placement="top">
+							</a> 
+						</div> 
+						<div class="col-md-11 col-sm-11 col-xs-11"> 
+							<a role="button" data-toggle="collapse" data-parent="#accordionPAres" href="#collapseNotas" aria-expanded="true" aria-controls="collapseNotas" > 
+								<div class="row"> 
+									<div class="col-md-1 col-sm-1 col-xs-1"> 
+										<span class="arrow">
+										</span> 
+									</div> 
+									<div class="col-md-7 col-sm-7 col-xs-7"> Resultado y observaciones
+									</div> 
+									<div class="col-md-3 col-sm-3 col-xs-3"> 
+									</div> 
+								</div> 
+
+							</a> 
+						</div> 
+					</div>
+				</h4> 
+			</div> 
+			<div id="collapseNotas" class="panel-collapse collapse" role="tabpanel" aria-labelledby="Notas"> 
+				<div class="panel-body"> 
+
+
+					
+
+					<label for="nom_observaciones" class="control-label">Observaciones
+					</label> 
+					<textarea class="form-control" name="nom_observaciones" id="nom_observaciones" ></textarea> 
+					
+
+					<div class="row form-inline">
+						
+						<div class="col-md-3  col-sm-3 col-xs-3">
+							<label for="nom_can_final" class="control-label">Cantidad final
+							</label> 
+							<input class="form-control" name="nom_can_final" id="nom_can_final" placeholder="placeholder" type="text "> 
+						</div>
+						<div class="col-md-3  col-sm-3 col-xs-3">
+							<label for="nom_rend_est" class="control-label">Rendimiento estándar
+							</label> 
+							<input class="form-control" name="nom_rend_est" id="nom_rend_est" placeholder="placeholder" type="text"> 
+						</div>
+						<div class="col-md-3  col-sm-3 col-xs-3">
+							<label for="nom_rend_obtenido" class="control-label">Rendimiento obtenido
+							</label> 
+							<input class="form-control" name="nom_rend_obtenido" id="nom_rend_obtenido" placeholder="placeholder" type="text"> 
+						</div>
+						<div class="col-md-3  col-sm-3 col-xs-3">
+
+							<label for="nom_rend_obtenidoA" class="control-label">Rendimiento obtenido
+							</label> 
+							<input class="form-control" name="nom_rend_obtenidoA" id="nom_rend_obtenidoA" placeholder="placeholder" type="text"> 
+
+						</div>
+					</div>
+					
+
+
+					
+					
+					
+
+				</div> 
+			</div> 
+		</div> 
+	</div> 
+
+
+
+
+
+</div>
+
+
+<div class="tab-pane" id="fieldMezclado">
+
+	<div class="panel-group" id="mezcladoAcordeon">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4 class="panel-title"> 
+					<div class="row"> 
+						<div class="col-md-1 col-sm-1 col-xs-1"> 
+							<a class="fluigicon fluigicon-info-sign" role="button" rel="popover" data-title="Info" data-content="" data-placement="top">
+							</a> 
+						</div> 
+						<div class="col-md-11 col-sm-11 col-xs-11"> 
+							<a role="button" data-toggle="collapse" data-parent="#mezcladoAcordeon" href="#collapse1" aria-expanded="true" aria-controls="collapse1" > 
+								<div class="row"> 
+									<div class="col-md-1 col-sm-1 col-xs-1"> 
+										<span class="arrow">
+										</span> 
+									</div> 
+									<div class="col-md-7 col-sm-7 col-xs-7"> PESADO/SURTIDO DE MATERIAS PRIMAS (PRINCIPIO Y ACTIVO Y EXCIPIENTES)
+									</div> 
+									<div class="col-md-3 col-sm-3 col-xs-3"> 
+									</div> 
+								</div> 
+
+							</a> 
+						</div> 
+					</div>
+				</h4> 
+			</div> 
+			<div id="collapse1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading1"> 
+				<div class="panel-body"> 
+
+
+					<ol> 
+						<li class="list-group-item"><p>Antes de iniciar el proceso de pesado de las materias primas y principio activo, revisar que los valores ambientales del área , estén en un rango de 18 °C – 25°C y no más de 65% de humedad relativa.<p></li>
+						<li class="list-group-item">Exponer lo menos posible al principio activo a las condiciones ambientales del área, teniendo cuidado de mantener cerrado el contenedor primario del activo.</li>
+						<li class="list-group-item">Verificar que el área y equipo de surtido de materias primas estén limpios y liberados y que no existan documentos ajenos al producto surtir
+						</li>
+						<li class="list-group-item">Iniciar el proceso de pesado de materias primas. Pesar sólo materias primas aprobadas por Control de Calidad. Revisar y verificar que tengan la etiqueta de aprobado</li>
+						<li class="list-group-item">Realizar las pesadas de acuerdo a la cantidad indicada en la orden de producción .
+							Identificar cada materia con la etiqueta de “Pesado de materia prima” etiqueta No. 025 , adjuntar etiquetas correspondientes
+						</li>
+					</ol>	
+
+
+
+					<div class="autorizacion fs-md-space">
+						<label for="idGrupoPesSurMP" class="control-label">Id grupo</label>
+						<input type="text" class="form-control"name= "idGrupoPesSurMP" id="idGrupoPesSurMP" placeholder="">
+						<label for="name_RealizoPesSurMP" class="control-label">Realizó PesSurMP</label>
+						<input type="text" class="form-control"name= "name_RealizoPesSurMP" id="name_RealizoPesSurMP" placeholder="">
+						<label for="date_RealizoCAP" class="control-label">Fecha Realizó PesSurMP</label>
+						<input type="text" class="form-control"name= "date_RealizoPesSurMP" id="date_RealizoPesSurMP" placeholder="">
+
+						<label for="name_VerificoPesSurMP" class="control-label">Verificó PesSurMP</label>
+						<input type="text" class="form-control"name= "name_VerificoPesSurMP" id="name_VerificoPesSurMP" placeholder="">
+						<label for="date_VerificoPesSurMP" class="control-label">Fecha Verificó PesSurMP</label>
+						<input type="text" class="form-control"name= "date_VerificoPesSurMP" id="date_VerificoPesSurMP" placeholder="">
+
+
+						<div class="row clearfix"> 
+							<div class="col-sm-4 col-md-4"> 
+								<div class="thumbnail btn btn-default date"  data-target=""> 
+									<div class="caption text-center"> <h3>Fecha </h3> <p data-result="date_RealizoCAP">... </p><p data-date=""></p> 
+									</div> 
+								</div> 
+							</div> 
+
+							<div class="col-sm-4 col-md-4"> 
+								<div class="thumbnail btn btn-default modal-call"  data-target=""> 
+									<div class="caption text-center"> <h3>Realizó </h3> <p data-result="name_RealizoPesSurMP">... </p><p data-date=""></p> 
+									</div> 
+								</div> 
+							</div> 
+							<div class="col-sm-4 col-md-4"> 
+								<div class="thumbnail btn btn-default modal-call"  data-target=""> 
+									<div class="caption text-center"> <h3>Verificó</h3> <p data-result="date_VerificoPesSurMP">... </p> <p data-date=""></p>
+									</div> 
+								</div> 
+							</div> 
+						</div> 
+						<textarea id="text_obsPesSurMP" name="text_obsPesSurMP" class="form-control"></textarea>
+					</div>
+
+
+				</div> 
+			</div> 
+		</div> 
+
+
+		<div class="panel panel-info"> 
+			<div class="panel-heading" role="tab" id="heading2"> 
+				<h4 class="panel-title"> 
+					<div class="row"> 
+						<div class="col-md-1 col-sm-1 col-xs-1"> 
+							<a class="fluigicon fluigicon-info-sign" role="button" rel="popover" data-title="Info" data-content="" data-placement="top">
+							</a> 
+						</div> 
+						<div class="col-md-11 col-sm-11 col-xs-11"> 
+							<a role="button" data-toggle="collapse" data-parent="#mezcladoAcordeon" href="#collapse2a" aria-expanded="true" aria-controls="collapse2a" > 
+								<div class="row"> 
+									<div class="col-md-1 col-sm-1 col-xs-1"> 
+										<span class="arrow">
+										</span> 
+									</div> 
+									<div class="col-md-7 col-sm-7 col-xs-7"> REVISIÓN Y VERIFICACIÓN
+									</div> 
+									<div class="col-md-3 col-sm-3 col-xs-3"> 
+									</div> 
+								</div> 
+
+							</a> 
+						</div> 
+					</div>
+				</h4> 
+			</div> 
+			<div id="collapse2a" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading2"> 
+				<div class="panel-body"> 
+					<ol>
+						<li class="list-group-item" >Pegar en la parte posterior del procedimiento las etiquetas de pesado de materia prima</li>
+						<li class="list-group-item" >Pegar en la parte posterior del procedimiento las etiquetas de identificación de limpieza de área y equipos.</li>
+						<li class="list-group-item" >Revisar y verificar que los accesorios de fabricación se encuentren limpios.</li>
+						<li class="list-group-item" >Revisar y verificar la cantidad e identidad de la materia prima, así como el material de envase primario, que corresponda a la orden de producción.</li>
+						<li class="list-group-item" >Al inicio de cada etapa del proceso de fabricación realizar el despeje del área correspondiente.</li>
+						<li class="list-group-item" >Solicitar al supervisor la revisión del despeje y al inspector la verificación de este</li>
+
+
+					</ol>
+
+
+
+					<div class="autorizacion fs-md-space">
+
+
+
+						<div class="row clearfix"> 
+							<div class="col-sm-4 col-md-4"> 
+								<div class="thumbnail btn btn-default modal-call"  data-target=""> 
+									<div class="caption text-center"> <h3>Realizó </h3> <p data-result="">... </p> 
+									</div> 
+								</div> 
+							</div> 
+
+							<div class="col-sm-4 col-md-4"> 
+								<div class="thumbnail btn btn-default modal-call"  data-target=""> 
+									<div class="caption text-center"> <h3> Supervisó </h3> <p data-result="">... </p> 
+									</div> 
+								</div> 
+							</div> 
+							<div class="col-sm-4 col-md-4"> 
+								<div class="thumbnail btn btn-default modal-call"  data-target=""> 
+									<div class="caption text-center"> <h3>Verificó</h3> <p data-result="">... </p> 
+									</div> 
+								</div> 
+							</div> 
+						</div> 
+
+					</div>
+
+				</div> 
+			</div> 
+		</div> 
+		<div class="panel panel-info"> 
+			<div class="panel-heading" role="tab" id="heading2b"> 
+				<h4 class="panel-title"> 
+					<div class="row"> 
+						<div class="col-md-1 col-sm-1 col-xs-1"> 
+
+							<a class="fluigicon fluigicon-info-sign" role="button" rel="popover" data-title="Info" data-content="" data-placement="top">
+							</a> 
+						</div> 
+						<div class="col-md-11 col-sm-11 col-xs-11"> 
+
+							<a role="button" data-toggle="collapse" data-parent="#mezcladoAcordeon" href="#collapse2b" aria-expanded="true" aria-controls="collapse2b" > 
+								<div class="row"> 
+									<div class="col-md-1 col-sm-1 col-xs-1"> 
+										<span class="arrow">
+										</span> 
+									</div> 
+									<div class="col-md-7 col-sm-7 col-xs-7">PROCESO DE MEZCLADO
+									</div> 
+									<div class="col-md-3 col-sm-3 col-xs-3"> 
+									</div> 
+								</div> 
+
+							</a> 
+						</div> 
+					</div>
+				</h4> 
+			</div> 
+			<div id="collapse2b" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading2b"> 
+				<div class="panel-body"> 
+					<ol>
+						<li>Revisión de limpieza y despeje del área , equipo , accesorios y herramientas a verificar; marcar “ ” si cumple o “X” no cumple:
+							<ol class="list-group">
+
+								<li class="list-group-item">
+									<div class="row">
+										<div class="col-md-10  col-sm-10 col-xs-10">
+											Área: Preparación de inyectables (COR-INY-01) 
+										</div>
+										<div class="col-md-2  col-sm-2 col-xs-2">
+											<input id="MySwitchButtonCheckbox3" name="MySwitchButtonCheckbox3" type="checkbox" data-on-text="Buena"  data-off-text="Mala">
+										</div>
+									</div>
+								</li>
+								<li class="list-group-item">
+									<div class="row">
+										<div class="col-md-10  col-sm-10 col-xs-10">
+
+											Tanque de 60 L (COR.INY.EQU.022)
+										</div>
+										<div class="col-md-2  col-sm-2 col-xs-2"> 
+											<input id="MySwitchButtonCheckbox2" name="MySwitchButtonCheckbox2" type="checkbox" data-on-text="Buena"  data-off-text="Mala">
+										</div>
+									</div>
+								</li>
+								<li class="list-group-item">
+									<div class="row">
+										<div class="col-md-10  col-sm-10 col-xs-10">
+											Agitador para tanque de 100 L
+										</div>
+										<div class="col-md-2  col-sm-2 col-xs-2"> 
+											<input id="MySwitchButtonCheckbox4" name="MySwitchButtonCheckbox4" type="checkbox" data-on-text="Buena"  data-off-text="Mala">
+										</div>
+									</li>
+									<li class="list-group-item">
+										<div class="row">
+											<div class="col-md-10  col-sm-10 col-xs-10">
+												Espátulas y propela de acero inoxidable
+											</div>
+											<div class="col-md-2  col-sm-2 col-xs-2"> 
+												<input id="MySwitchButtonCheckbox5" name="MySwitchButtonCheckbox5" type="checkbox" data-on-text="Buena"  data-off-text="Mala">
+											</div>
+										</li>
+										<li class="list-group-item">
+											<div class="row">
+												<div class="col-md-10  col-sm-10 col-xs-10">
+													Recipiente de acero inoxidable 5 L
+												</div>
+												<div class="col-md-2  col-sm-2 col-xs-2"> 
+													<input id="MySwitchButtonCheckbox6" name="MySwitchButtonCheckbox6" type="checkbox" data-on-text="Buena"  data-off-text="Mala">
+												</div>
+											</li>
+											<li class="list-group-item">
+												<div class="row">
+													<div class="col-md-10  col-sm-10 col-xs-10">
+														Báscula de plataforma (COR.INY.INT.004)
+													</div>
+													<div class="col-md-2  col-sm-2 col-xs-2"> 
+														<input id="MySwitchButtonCheckbox7" name="MySwitchButtonCheckbox7" type="checkbox" data-on-text="Buena"  data-off-text="Mala">
+													</div>
+												</li>
+												<li class="list-group-item">
+													<div class="row">
+														<div class="col-md-10  col-sm-10 col-xs-10">
+															Recipiente para colección de agua 20 L
+														</div>
+														<div class="col-md-2  col-sm-2 col-xs-2"> 
+															<input id="MySwitchButtonCheckbox8" name="MySwitchButtonCheckbox8" type="checkbox" data-on-text="Buena"  data-off-text="Mala">
+														</div>
+													</li>
+
+
+												</ol>
+											</li>
+										</ol>
+
+
+
+										<div class="row clearfix">
+											
+
+										</div>
+										
+										<div class="autorizacion">
+											<div class="hide">
+												<label for="reviso_group" class="control-label">Grupo</label>
+												<input type="text" class="form-control"name= "reviso_group" id="reviso_group" placeholder="placeholder">
+												<label for="reviso_name" class="control-label">labelName</label>
+												<input type="text" class="form-control"name= "reviso_name" id="reviso_name" placeholder="placeholder">
+												<label for="superviso_teste" class="control-label">labelName</label>
+												<input type="text" class="form-control"name= "superviso_teste" id="superviso_teste" placeholder="placeholder">
+												<label for="verifico_teste" class="control-label">labelName</label>
+												<input type="text" class="form-control"name= "verifico_teste" id="verifico_teste" placeholder="placeholder">
+											</div>
+											<fieldset>
+												<div class="row clearfix"> 
+
+													<div class="col-sm-4 col-md-4"> 
+														<div class="thumbnail btn btn-default modal-call " data-target="reviso_group" data-result="reviso_name" > 
+															<div class="caption text-center"> 
+																<h3>Realizó
+																</h3> 
+																<p data-result="reviso_name">...
+																</p> 
+
+
+
+															</div> 
+														</div> 
+													</div> 
+													<div class="col-sm-4 col-md-4"> 
+														<div class="thumbnail btn btn-default modal-call "  data-target="reviso_group" data-result="reviso_name"> 
+															<div class="caption text-center"> 
+																<h3>Revisó
+																</h3> 
+																<p data-result="reviso_name">...
+																</p> 
+
+
+															</div> 
+														</div> 
+													</div> 
+													<div class="col-sm-4 col-md-4"> 
+														<div class="thumbnail btn btn-default modal-call"  data-target="verifico_teste"> 
+															<div class="caption text-center"> 
+																<h3>Autorizó
+																</h3> 
+																<p>...
+																</p> 
+
+
+															</div> 
+														</div> 
+													</div> 
+												</div>
+
+											</div>  
+
+										</div> 
+									</div> 
+								</div> 
+
+
+
+
+
+
+
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title">
+
+											<div class="row"> 
+												<div class="col-md-1 col-sm-1 col-xs-1"> 
+													<a class="fluigicon fluigicon-info-sign" role="button" rel="popover" data-title="Info" data-content="Valor de inicio" data-placement="top">
+													</a> 
+												</div> 
+
+												<a data-toggle="collapse" data-parent="#mezcladoAcordeon" href="#mezcladoA1"> 
+
+													<div class="col-md-1 col-sm-1 col-xs-1"> 
+
+													</div> 
+													<div class="col-md-7 col-sm-7 col-xs-7"> Datos iniciales 
+													</div> 
+													<div class="col-md-3 col-sm-3 col-xs-3"> 
+													</div> 
+
+
+
+												</a> 
+
+											</div>            
+
+
+										</h4>
+									</div>
+									<div id="mezcladoA1" class="panel-collapse collapse">
+										<div class="panel-body">
+
+											<div class="informacion">
+												<h3>Inicio de Proceso de Mezclado</h3>
+												<ol>
+													<li class="list-group-item"><p>Verificar hora de inicio de proceso</p></li>
+												</ol>
+
+
+
+												<div class="hide">
+													<label for="mezNameRealizo" class="control-label">Grupo Realizador</label>
+													<input type="text" class="form-control"name= "mezNameRealizo" id="mezNameRealizo" >
+													<label for="autoMezRealizo" class="control-label">Aprobación</label>
+													<input type="checkbox" class="form-control"name= "autoMezRealizo" id="autoMezRealizo" >
+												</div>
+
+												<div class="row">
+													<div class="col-md-3  col-sm-3 col-xs-3">
+														<label for="horaInicioMezclado" class="control-label">Hora de inicio:</label> 
+													</div>
+													<div class="col-md-3  col-sm-3 col-xs-3">
+
+														<div class="input-group">
+															<input name="horaInicioMezclado" id="horaInicioMezclado" class="form-control"  />
+															<div class="input-group-addon"><span class="fluigicon fluigicon-time"></span></div> 
+														</div>
+
+													</div>
+
+
+													<div class="col-md-3  col-sm-3 col-xs-3">
+														<label for="fechaInicioMezclado" class="control-label" > Fecha de inicio:</label>
+													</div>
+													<div class="col-md-3  col-sm-3 col-xs-3">
+														<div class="input-group">
+															<input name="fechaInicioMezclado" id="fechaInicioMezclado" class="form-control"/>
+															<div class="input-group-addon"><span class="fluigicon fluigicon-calendar"></span></div> 
+														</div>
+													</div>
+
+												</div>
+
+
+
+											</div>
+
+
+											<div class="row">	
+												<div class="autorizacion fs-md-space">
+
+													<div class="row clearfix"> 
+														<div class="col-sm-6 col-md-6"> 
+															<div class="thumbnail btn btn-default modal-call"  data-target="mezNameRealizo"> 
+																<div class="caption text-center"> <h3>Realizó </h3> <p data-result="">... </p> 
+																</div> 
+															</div> 
+														</div> 
+														<div class="col-sm-6 col-md-6"> 
+															<div class="thumbnail btn btn-default modal-call"  data-target="superviso_teste"> 
+																<div class="caption text-center"> <h3>Supervisó</h3> <p data-result="">... </p> 
+																</div> 
+															</div> 
+														</div> 
+													</div> 
+
+												</div>
+											</div>	
+										</div>
+									</div>
+								</div>
+
+
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title">
+
+											<div class="row"> 
+												<div class="col-md-1 col-sm-1 col-xs-1"> 
+													<a class="fluigicon fluigicon-info-sign" role="button" rel="popover" data-title="Info" data-content="Valores ambientales del área" data-placement="top">
+													</a> 
+												</div> 
+												<a role="button" data-toggle="collapse" data-parent="#mezcladoAcordeon" href="#mezcladoA2" aria-expanded="true" aria-controls="mezcladoA2" > 
+
+
+													<div class="col-md-1 col-sm-1 col-xs-1"> 
+
+													</div> 
+													<div class="col-md-7 col-sm-7 col-xs-7"> Valores ambientales del área
+													</div> 
+													<div class="col-md-3 col-sm-3 col-xs-3"> 
+													</div> 
+
+
+
+												</a> 
+
+											</div>            
+
+
+										</h4>
+									</div>
+									<div id="mezcladoA2" class="panel-collapse collapse">
+										<div class="panel-body">
+											<p> Antes de iniciar el proceso de fabricación, anotar los valores ambientales del área, las cuales deben estar en un rango de <strong>18°C — 25°C </strong> y no más de<strong> 65% </strong>de humedad relativa.</p>
+
+											<div class="row">
+
+												<div class="col-md-3  col-sm-3 col-xs-3">
+													<label for="tempAmbiental" class="control-label">Temperatura</label>
+												</div>
+												<div class="col-md-3  col-sm-3 col-xs-3">
+													<div class="input-group">
+														<input type="text" class="form-control"name= "tempAmbiental" id="tempAmbiental" placeholder="0">
+														<div class="input-group-addon">
+															°C
+														</div>
+													</div>
+												</div>
+
+												<div class="col-md-3  col-sm-3 col-xs-3">
+													<label for="HumAmbiental" class="control-label">Humedad:</label>
+												</div>
+												<div class="col-md-3  col-sm-3 col-xs-3">
+													<div class="input-group">
+														<input type="text" class="form-control"name= "HumAmbiental" id="HumAmbiental" placeholder="0">
+														<div class="input-group-addon">
+															%
+														</div>
+													</div>
+												</div>
+
+
+											</div>
+
+
+
+
+
+
+											<div class="autorizacion fs-md-space">
+
+
+
+												<div class="row clearfix"> 
+													<div class="col-sm-4 col-md-4"> 
+														<div class="thumbnail btn btn-default modal-call"  data-target=""> 
+															<div class="caption text-center"> <h3>Realizó </h3> <p data-result="">... </p> 
+															</div> 
+														</div> 
+													</div> 
+
+													<div class="col-sm-4 col-md-4"> 
+														<div class="thumbnail btn btn-default modal-call"  data-target=""> 
+															<div class="caption text-center"> <h3> Supervisó </h3> <p data-result="">... </p> 
+															</div> 
+														</div> 
+													</div> 
+													<div class="col-sm-4 col-md-4"> 
+														<div class="thumbnail btn btn-default modal-call"  data-target=""> 
+															<div class="caption text-center"> <h3>Verificó</h3> <p data-result="">... </p> 
+															</div> 
+														</div> 
+													</div> 
+												</div> 
+
+											</div>
+
+
+										</div>
+									</div>
+								</div>
+
+
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title">
+
+											<div class="row"> 
+												<div class="col-md-1 col-sm-1 col-xs-1"> 
+													<a class="fluigicon fluigicon-info-sign" role="button" rel="popover" data-title="Info" data-content="Materias primas surtidas vs OP" data-placement="top">
+													</a> 
+												</div> 
+												<a role="button" data-toggle="collapse" data-parent="#mezcladoAcordeon" href="#mezcladoA3" aria-expanded="true" aria-controls="mezcladoA3" > 
+
+
+													<div class="col-md-1 col-sm-1 col-xs-1"> 
+
+													</div> 
+													<div class="col-md-7 col-sm-7 col-xs-7"> Materias primas surtidas vs OP
+													</div> 
+													<div class="col-md-3 col-sm-3 col-xs-3"> 
+													</div> 
+
+
+
+												</a> 
+
+											</div>            
+
+
+										</h4>
+									</div>
+									<div id="mezcladoA3" class="panel-collapse collapse">
+										<div class="panel-body">
+											Revisar que las materias primas surtidas, correspondan con lo indicado en la orden de producción.
+
+
+
+
+											<div class="autorizacion fs-md-space">
+
+
+
+												<div class="row clearfix"> 
+													<div class="col-sm-4 col-md-4"> 
+														<div class="thumbnail btn btn-default modal-call"  data-target=""> 
+															<div class="caption text-center"> <h3>Realizó </h3> <p data-result="">... </p><p data-date=""></p> 
+															</div> 
+														</div> 
+													</div> 
+
+													<div class="col-sm-4 col-md-4"> 
+														<div class="thumbnail btn btn-default modal-call"  data-target=""> 
+															<div class="caption text-center"> <h3> Supervisó </h3> <p data-result="">... </p><p data-date=""></p> 
+															</div> 
+														</div> 
+													</div> 
+													<div class="col-sm-4 col-md-4"> 
+														<div class="thumbnail btn btn-default modal-call"  data-target=""> 
+															<div class="caption text-center"> <h3>Verificó</h3> <p data-result="">... </p> <p data-date=""></p>
+															</div> 
+														</div> 
+													</div> 
+												</div> 
+
+											</div>
+
+
+										</div>
+									</div>
+								</div>
+
+
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title">
+
+											<div class="row"> 
+												<div class="col-md-1 col-sm-1 col-xs-1"> 
+													<a class="fluigicon fluigicon-info-sign" role="button" rel="popover" data-title="Info" data-content="Materias primas surtidas vs OP" data-placement="top">
+													</a> 
+												</div> 
+												<a role="button" data-toggle="collapse" data-parent="#mezcladoAcordeon" href="#mezcladoA4" aria-expanded="true" aria-controls="mezcladoA4" > 
+
+
+													<div class="col-md-1 col-sm-1 col-xs-1"> 
+
+													</div> 
+													<div class="col-md-7 col-sm-7 col-xs-7"> Anexar etiqueta de liberación del agua
+													</div> 
+													<div class="col-md-3 col-sm-3 col-xs-3"> 
+													</div> 
+
+
+
+												</a> 
+
+											</div>            
+
+
+										</h4>
+									</div>
+									<div id="mezcladoA4" class="panel-collapse collapse">
+										<div class="panel-body">
+											Revisar que las materias primas surtidas, correspondan con lo indicado en la orden de producción.
+
+
+
+
+											<div class="autorizacion fs-md-space">
+
+
+
+												<div class="row clearfix"> 
+													<div class="col-sm-4 col-md-4"> 
+														<div class="thumbnail btn btn-default modal-call"  data-target=""> 
+															<div class="caption text-center"> <h3>Realizó </h3> <p data-result="">... </p><p data-date=""></p> 
+															</div> 
+														</div> 
+													</div> 
+
+													<div class="col-sm-4 col-md-4"> 
+														<div class="thumbnail btn btn-default modal-call"  data-target=""> 
+															<div class="caption text-center"> <h3> Supervisó </h3> <p data-result="">... </p><p data-date=""></p> 
+															</div> 
+														</div> 
+													</div> 
+													<div class="col-sm-4 col-md-4"> 
+														<div class="thumbnail btn btn-default modal-call"  data-target=""> 
+															<div class="caption text-center"> <h3>Verificó</h3> <p data-result="">... </p> <p data-date=""></p>
+															</div> 
+														</div> 
+													</div> 
+												</div> 
+
+											</div>
+
+										</div>
+									</div>
+								</div>
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title">
+
+											<div class="row"> 
+												<div class="col-md-1 col-sm-1 col-xs-1"> 
+													<a class="fluigicon fluigicon-info-sign" role="button" rel="popover" data-title="Info" data-content="Materias primas surtidas vs OP" data-placement="top">
+													</a> 
+												</div> 
+												<a role="button" data-toggle="collapse" data-parent="#mezcladoAcordeon" href="#mezcladoA5" aria-expanded="true" aria-controls="mezcladoA5" > 
+
+
+													<div class="col-md-1 col-sm-1 col-xs-1"> 
+
+													</div> 
+													<div class="col-md-7 col-sm-7 col-xs-7"> MP al área de Preparación de inyectables
+													</div> 
+													<div class="col-md-3 col-sm-3 col-xs-3"> 
+													</div> 
+
+
+
+												</a> 
+
+											</div>            
+
+
+										</h4>
+									</div>
+									<div id="mezcladoA5" class="panel-collapse collapse">
+										<div class="panel-body">
+											Llevar las materias primas al área de Preparación de inyectables (COR-INY-01). 
+
+
+
+
+
+											<div class="autorizacion fs-md-space">
+
+
+
+												<div class="row clearfix"> 
+													<div class="col-sm-6 col-md-6"> 
+														<div class="thumbnail btn btn-default modal-call"  data-target=""> 
+															<div class="caption text-center"> <h3>Realizó </h3> <p data-result="">... </p><p data-date=""></p> 
+															</div> 
+														</div> 
+													</div> 
+
+													<div class="col-sm-6 col-md-6"> 
+														<div class="thumbnail btn btn-default modal-call"  data-target=""> 
+															<div class="caption text-center"> <h3> Supervisó </h3> <p data-result="">... </p><p data-date=""></p> 
+															</div> 
+														</div> 
+													</div> 
+
+												</div> 
+
+											</div>
+
+
+										</div>
+									</div>
+								</div>
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title">
+
+											<div class="row"> 
+												<div class="col-md-1 col-sm-1 col-xs-1"> 
+													<a class="fluigicon fluigicon-info-sign" role="button" rel="popover" data-title="Info" data-content="Materias primas surtidas vs OP" data-placement="top">
+													</a> 
+												</div> 
+												<a role="button" data-toggle="collapse" data-parent="#mezcladoAcordeon" href="#mezcladoA6" aria-expanded="true" aria-controls="mezcladoA6" > 
+
+													<div class="col-md-1 col-sm-1 col-xs-1"> 
+
+													</div> 
+													<div class="col-md-7 col-sm-7 col-xs-7"> Verificar tanque limpio y valvula cerrada
+													</div> 
+													<div class="col-md-3 col-sm-3 col-xs-3"> 
+													</div> 
+
+
+
+												</a> 
+
+											</div>            
+
+
+										</h4>
+									</div>
+									<div id="mezcladoA6" class="panel-collapse collapse">
+										<div class="panel-body">
+											<ol class="list-group">
+												<li class="list-group-item">Una vez que el agua, principio activo y materias primas han sido liberadas, ingresar al área de preparación de inyectables e iniciar con el mezclado de la solución.
+												</li>
+
+												<li class="list-group-item">
+													Utilizar en todo momento su equipo de protección personal completo (mascarillas de respiración al manipular el activo y lentes de seguridad).
+
+												</li>
+												<li class="list-group-item">
+													Antes de agregar los materiales al tanque de 60 L (COR.INY.EQU.022), verificar que el tanque se encuentre limpio y la válvula cerrada.
+												</li>
+
+
+
+
+												<div class="autorizacion fs-md-space">
+
+
+
+													<div class="row clearfix"> 
+														<div class="col-sm-4 col-md-4"> 
+															<div class="thumbnail btn btn-default modal-call"  data-target=""> 
+																<div class="caption text-center"> <h3>Realizó </h3> <p data-result="">... </p><p data-date=""></p> 
+																</div> 
+															</div> 
+														</div> 
+
+														<div class="col-sm-4 col-md-4"> 
+															<div class="thumbnail btn btn-default modal-call"  data-target=""> 
+																<div class="caption text-center"> <h3> Supervisó </h3> <p data-result="">... </p><p data-date=""></p> 
+																</div> 
+															</div> 
+														</div> 
+														<div class="col-sm-4 col-md-4"> 
+															<div class="thumbnail btn btn-default modal-call"  data-target=""> 
+																<div class="caption text-center"> <h3>Verificó</h3> <p data-result="">... </p> <p data-date=""></p>
+																</div> 
+															</div> 
+														</div> 
+													</div> 
+
+												</div>
+
+
+											</div>
+										</div>
+									</div>
+									<div class="panel panel-default">
+										<div class="panel-heading">
+											<h4 class="panel-title">
+
+												<div class="row"> 
+													<div class="col-md-1 col-sm-1 col-xs-1"> 
+														<a class="fluigicon fluigicon-info-sign" role="button" rel="popover" data-title="Info" data-content="Materias primas surtidas vs OP" data-placement="top">
+														</a> 
+													</div> 
+													<a role="button" data-toggle="collapse" data-parent="#mezcladoAcordeon" href="#mezcladoA7" aria-expanded="true" aria-controls="mezcladoA7" > 
+
+
+														<div class="col-md-1 col-sm-1 col-xs-1"> 
+
+														</div> 
+														<div class="col-md-7 col-sm-7 col-xs-7"> Pesado de agua 20 L
+														</div> 
+														<div class="col-md-3 col-sm-3 col-xs-3"> 
+														</div> 
+
+
+
+													</a> 
+
+												</div>            
+
+
+											</h4>
+										</div>
+										<div id="mezcladoA7" class="panel-collapse collapse">
+											<div class="panel-body">
+												Pesar en el recipiente de 20 L, aproximadamente 19 kg de agua para la fabricación de inyectables y dejar enfriar a temperatura ambiente, esta es utilizada como cantidad final para el aforo en el tanque
+
+												<div class="autorizacion fs-md-space">
+
+
+
+													<div class="row clearfix"> 
+														<div class="col-sm-4 col-md-4"> 
+															<div class="thumbnail btn btn-default modal-call"  data-target=""> 
+																<div class="caption text-center"> <h3>Realizó </h3> <p data-result="">... </p><p data-date=""></p> 
+																</div> 
+															</div> 
+														</div> 
+
+														<div class="col-sm-4 col-md-4"> 
+															<div class="thumbnail btn btn-default modal-call"  data-target=""> 
+																<div class="caption text-center"> <h3> Supervisó </h3> <p data-result="">... </p><p data-date=""></p> 
+																</div> 
+															</div> 
+														</div> 
+														<div class="col-sm-4 col-md-4"> 
+															<div class="thumbnail btn btn-default modal-call"  data-target=""> 
+																<div class="caption text-center"> <h3>Verificó</h3> <p data-result="">... </p> <p data-date=""></p>
+																</div> 
+															</div> 
+														</div> 
+													</div> 
+
+												</div>
+
+											</div>
+										</div>
+									</div>
+									<div class="panel panel-default">
+										<div class="panel-heading">
+											<h4 class="panel-title">
+
+												<div class="row"> 
+													<div class="col-md-1 col-sm-1 col-xs-1"> 
+														<a class="fluigicon fluigicon-info-sign" role="button" rel="popover" data-title="Info" data-content="Materias primas surtidas vs OP" data-placement="top">
+														</a> 
+													</div> 
+													<a role="button" data-toggle="collapse" data-parent="#mezcladoAcordeon" href="#mezcladoA8" aria-expanded="true" aria-controls="mezcladoA8" > 
+
+
+														<div class="col-md-1 col-sm-1 col-xs-1"> 
+
+														</div> 
+														<div class="col-md-7 col-sm-7 col-xs-7"> Pesar el tanque de 60L
+														</div> 
+														<div class="col-md-3 col-sm-3 col-xs-3"> 
+														</div> 
+
+
+
+													</a> 
+
+												</div>            
+
+
+											</h4>
+										</div>
+										<div id="mezcladoA8" class="panel-collapse collapse">
+											<div class="panel-body">
+												Pesar el tanque de 60 L (CORANY.EQU.022), en la báscula de plataforma del área.
+
+
+
+
+												<div class="form-group">
+													<label class="label-control" for="number_MezcPesoTara">Peso Tara</label>
+													<div class="input-group">
+														<input class="form-control" id="number_MezcPesoTara" name="number_MezcPesoTara">
+														<div class="input-group-addon">
+															kg
+														</div>
+													</div>
+												</div>
+
+
+
+												<div class="autorizacion fs-md-space">
+
+
+
+													<div class="row clearfix"> 
+														<div class="col-sm-6 col-md-6"> 
+															<div class="thumbnail btn btn-default modal-call"  data-target=""> 
+																<div class="caption text-center"> <h3>Realizó </h3> <p data-result="">... </p><p data-date=""></p> 
+																</div> 
+															</div> 
+														</div> 
+
+														<div class="col-sm-6 col-md-6"> 
+															<div class="thumbnail btn btn-default modal-call"  data-target=""> 
+																<div class="caption text-center"> <h3> Supervisó </h3> <p data-result="">... </p><p data-date=""></p> 
+																</div> 
+															</div> 
+														</div> 
+
+													</div> 
+
+												</div>
+
+
+											</div>
+										</div>
+									</div>
+									<div class="panel panel-default">
+										<div class="panel-heading">
+											<h4 class="panel-title">
+
+												<div class="row"> 
+													<div class="col-md-1 col-sm-1 col-xs-1"> 
+														<a class="fluigicon fluigicon-info-sign" role="button" rel="popover" data-title="Info" data-content="Materias primas surtidas vs OP" data-placement="top">
+														</a> 
+													</div> 
+													<a role="button" data-toggle="collapse" data-parent="#mezcladoAcordeon" href="#mezcladoA9" aria-expanded="true" aria-controls="mezcladoA9" > 
+
+
+														<div class="col-md-1 col-sm-1 col-xs-1"> 
+
+														</div> 
+														<div class="col-md-7 col-sm-7 col-xs-7"> Colocar agua en tanque mayor
+														</div> 
+														<div class="col-md-3 col-sm-3 col-xs-3"> 
+														</div> 
+
+
+
+													</a> 
+
+												</div>            
+
+
+											</h4>
+										</div>
+										<div id="mezcladoA9" class="panel-collapse collapse">
+											<div class="panel-body">
+												En este tanque previamente tarado, colocar 40 kg de agua para la fabricación de inyectables directamente del punto de uso a una temperatura mayor de 40°C.
+												Temperatura del agua para fabricación de inyectables:   
+
+												<div class="autorizacion fs-md-space">
+
+
+
+													<div class="row clearfix"> 
+														<div class="col-sm-4 col-md-4"> 
+															<div class="thumbnail btn btn-default modal-call"  data-target=""> 
+																<div class="caption text-center"> <h3>Realizó </h3> <p data-result="">... </p><p data-date=""></p> 
+																</div> 
+															</div> 
+														</div> 
+
+														<div class="col-sm-4 col-md-4"> 
+															<div class="thumbnail btn btn-default modal-call"  data-target=""> 
+																<div class="caption text-center"> <h3> Supervisó </h3> <p data-result="">... </p><p data-date=""></p> 
+																</div> 
+															</div> 
+														</div> 
+														<div class="col-sm-4 col-md-4"> 
+															<div class="thumbnail btn btn-default modal-call"  data-target=""> 
+																<div class="caption text-center"> <h3>Verificó</h3> <p data-result="">... </p> <p data-date=""></p>
+																</div> 
+															</div> 
+														</div> 
+													</div> 
+
+												</div>
+
+											</div>
+										</div>
+									</div>
+									<div class="panel panel-default">
+										<div class="panel-heading">
+											<h4 class="panel-title">
+
+												<div class="row"> 
+													<div class="col-md-1 col-sm-1 col-xs-1"> 
+														<a class="fluigicon fluigicon-info-sign" role="button" rel="popover" data-title="Info" data-content="Materias primas surtidas vs OP" data-placement="top">
+														</a> 
+													</div> 
+													<a role="button" data-toggle="collapse" data-parent="#mezcladoAcordeon" href="#mezcladoA10" aria-expanded="true" aria-controls="mezcladoA10" > 
+
+
+														<div class="col-md-1 col-sm-1 col-xs-1"> 
+
+														</div> 
+														<div class="col-md-7 col-sm-7 col-xs-7"> Adicionar ácido benzoico
+														</div> 
+														<div class="col-md-3 col-sm-3 col-xs-3"> 
+														</div> 
+
+
+
+													</a> 
+
+												</div>            
+
+
+											</h4>
+										</div>
+										<div id="mezcladoA10" class="panel-collapse collapse">
+											<div class="panel-body">
+												Adicionar al tanque, 30 g de ácido benzoico y agitar durante 10 min a una velocidad de 500 rpm, a una temperatura mayor a 40 °C.
+
+												<div class="form-group">
+													<label class="label-control" for="time_AdAcidoBenInicioAgit">Inició agitación:</label>
+													<div class="input-group">
+														<input class="form-control" id="time_AdAcidoBenInicioAgit" name="time_AdAcidoBenInicioAgit">
+														<div class="input-group-addon">
+															hrs
+														</div>
+													</div>
+
+
+
+													<label class="label-control" for="time_AdAcidoBenTerminoAgit">Término de agitación:</label>
+													<div class="input-group">
+														<input class="form-control" id="time_AdAcidoBenTerminoAgit" name="time_AdAcidoBenTerminoAgit">
+														<div class="input-group-addon">
+															hrs
+														</div>
+													</div>
+
+
+
+													<label class="label-control" for="time_AdAcidoBenInicioAgit">Velocidad de agitación:</label>
+													<div class="input-group">
+														<input class="form-control" id="time_AdAcidoBenInicioAgit" name="time_AdAcidoBenInicioAgit">
+														<div class="input-group-addon">
+															hrs
+														</div>
+													</div>
+
+
+
+													<label class="label-control" for="number_AdAcidoBenTempAgit">Temperatura</label>
+													<div class="input-group">
+														<input class="form-control" id="number_AdAcidoBenTempAgit" name="number_AdAcidoBenTempAgit">
+														<div class="input-group-addon">
+															°C
+														</div>
+													</div>
+												</div>
+
+
+
+
+												<div class="autorizacion fs-md-space">
+
+
+
+													<div class="row clearfix"> 
+														<div class="col-sm-6 col-md-6"> 
+															<div class="thumbnail btn btn-default modal-call"  data-target=""> 
+																<div class="caption text-center"> <h3>Realizó </h3> <p data-result="">... </p><p data-date=""></p> 
+																</div> 
+															</div> 
+														</div> 
+
+														<div class="col-sm-6 col-md-6"> 
+															<div class="thumbnail btn btn-default modal-call"  data-target=""> 
+																<div class="caption text-center"> <h3> Supervisó </h3> <p data-result="">... </p><p data-date=""></p> 
+																</div> 
+															</div> 
+														</div> 
+
+													</div> 
+
+												</div>
+
+											</div>
+										</div>
+									</div>
+									<div class="panel panel-default">
+										<div class="panel-heading">
+											<h4 class="panel-title">
+
+												<div class="row"> 
+													<div class="col-md-1 col-sm-1 col-xs-1"> 
+														<a class="fluigicon fluigicon-info-sign" role="button" rel="popover" data-title="Info" data-content="Materias primas surtidas vs OP" data-placement="top">
+														</a> 
+													</div> 
+													<a role="button" data-toggle="collapse" data-parent="#mezcladoAcordeon" href="#mezcladoA11" aria-expanded="true" aria-controls="mezcladoA11" > 
+
+
+														<div class="col-md-1 col-sm-1 col-xs-1"> 
+
+														</div> 
+														<div class="col-md-7 col-sm-7 col-xs-7"> Adicionar cloruro de sodio
+														</div> 
+														<div class="col-md-3 col-sm-3 col-xs-3"> 
+														</div> 
+
+
+
+													</a> 
+
+												</div>            
+
+
+											</h4>
+										</div>
+									
+									<div id="mezcladoA11" class="panel-collapse collapse">
+										<div class="panel-body">
+											Adicionar 54 g de cloruro de sodio al tanque de 60 L y agitar durante 5 min a 500 rpm.
+
+											<div class="form-group">
+												<label class="label-control" for="time_AdCloruroInicioAgi">Inició agitación</label>
+												<div class="input-group">
+													<input class="form-control" id="time_AdCloruroInicioAgi" name="time_AdCloruroInicioAgi">
+													<div class="input-group-addon">
+														hrs
+													</div>
+												</div>
+												<label class="label-control" for="time_AdCloruroTermAgi">Término de agitación:</label>
+												<div class="input-group">
+													<input class="form-control" id="time_AdCloruroTermAgi" name="time_AdCloruroTermAgi">
+													<div class="input-group-addon">
+														hrs
+													</div>
+												</div>
+												<label class="label-control" for="time_AdCloruroVelAgi">Velocidad de agitación</label>
+												<div class="input-group">
+													<input class="form-control" id="time_AdCloruroVelAgi" name="time_AdCloruroVelAgi">
+													<div class="input-group-addon">
+														rpm
+													</div>
+												</div>
+											</div>
+
+
+
+											<div class="autorizacion fs-md-space">
+
+
+
+												<div class="row clearfix"> 
+													<div class="col-sm-6 col-md-6"> 
+														<div class="thumbnail btn btn-default modal-call"  data-target=""> 
+															<div class="caption text-center"> <h3>Realizó </h3> <p data-result="">... </p><p data-date=""></p> 
+															</div> 
+														</div> 
+													</div> 
+
+													<div class="col-sm-6 col-md-6"> 
+														<div class="thumbnail btn btn-default modal-call"  data-target=""> 
+															<div class="caption text-center"> <h3> Supervisó </h3> <p data-result="">... </p><p data-date=""></p> 
+															</div> 
+														</div> 
+													</div> 
+
+												</div> 
+
+											</div>
+
+										</div>
+									</div>
+									</div>
+
+									<div class="panel panel-default">
+										<div class="panel-heading">
+											<h4 class="panel-title">
+
+												<div class="row"> 
+													<div class="col-md-1 col-sm-1 col-xs-1"> 
+														<a class="fluigicon fluigicon-info-sign" role="button" rel="popover" data-title="Info" data-content="Materias primas surtidas vs OP" data-placement="top">
+														</a> 
+													</div> 
+													<a role="button" data-toggle="collapse" data-parent="#mezcladoAcordeon" href="#mezcladoA12" aria-expanded="true" aria-controls="mezcladoA12" > 
+
+
+														<div class="col-md-1 col-sm-1 col-xs-1"> 
+
+														</div> 
+														<div class="col-md-7 col-sm-7 col-xs-7"> Adicionar glicerol
+														</div> 
+														<div class="col-md-3 col-sm-3 col-xs-3"> 
+														</div> 
+
+
+
+													</a> 
+
+												</div>            
+
+
+											</h4>
+										</div>
+									
+									<div id="mezcladoA12" class="panel-collapse collapse">
+										<div class="panel-body">
+											Adicionar 300 g de glicerol al tanque de 60 L y agitar durante 5 min a 500 rpm. 
+
+
+											<div class="form-group">
+												<label class="label-control" for="time_AdCloruroInicioAgi">Inició agitación</label>
+												<div class="input-group">
+													<input class="form-control" id="time_AdCloruroInicioAgi" name="time_AdGlicerInicioAgi">
+													<div class="input-group-addon">
+														hrs
+													</div>
+												</div>
+												<label class="label-control" for="time_AdCloruroTermAgi">Término de agitación:</label>
+												<div class="input-group">
+													<input class="form-control" id="time_AdCloruroTermAgi" name="time_AdGlicerTermiAgi">
+													<div class="input-group-addon">
+														hrs
+													</div>
+												</div>
+												<label class="label-control" for="time_AdCloruroVelAgi">Velocidad de agitación</label>
+												<div class="input-group">
+													<input class="form-control" id="time_AdCloruroVelAgi" name="time_AdGlicerVelAgi">
+													<div class="input-group-addon">
+														rpm
+													</div>
+												</div>
+											</div>
+
+
+
+											<div class="autorizacion fs-md-space">
+
+
+
+												<div class="row clearfix"> 
+													<div class="col-sm-6 col-md-6"> 
+														<div class="thumbnail btn btn-default modal-call"  data-target=""> 
+															<div class="caption text-center"> <h3>Realizó </h3> <p data-result="">... </p><p data-date=""></p> 
+															</div> 
+														</div> 
+													</div> 
+
+													<div class="col-sm-6 col-md-6"> 
+														<div class="thumbnail btn btn-default modal-call"  data-target=""> 
+															<div class="caption text-center"> <h3> Supervisó </h3> <p data-result="">... </p><p data-date=""></p> 
+															</div> 
+														</div> 
+													</div> 
+
+												</div> 
+
+											</div>
+										</div>
+									</div>
+</div>
+									<div class="panel panel-default">
+										<div class="panel-heading">
+											<h4 class="panel-title">
+
+												<div class="row"> 
+													<div class="col-md-1 col-sm-1 col-xs-1"> 
+														<a class="fluigicon fluigicon-info-sign" role="button" rel="popover" data-title="Info" data-content="Materias primas surtidas vs OP" data-placement="top">
+														</a> 
+													</div> 
+													<a role="button" data-toggle="collapse" data-parent="#mezcladoAcordeon" href="#mezcladoA13" aria-expanded="true" aria-controls="mezcladoA13" > 
+
+
+														<div class="col-md-1 col-sm-1 col-xs-1"> 
+
+														</div> 
+														<div class="col-md-7 col-sm-7 col-xs-7">Adicionar propilenglicol
+														</div> 
+														<div class="col-md-3 col-sm-3 col-xs-3"> 
+														</div> 
+
+
+
+													</a> 
+
+												</div>            
+
+
+											</h4>
+										</div>
+									
+									<div id="mezcladoA13" class="panel-collapse collapse">
+										<div class="panel-body">
+											Adicionar 300 g de propilenglicol al tanque de 60 L y agitar durante 5 min a 500 rpm.
+
+											<div class="form-group">
+												<label class="label-control" for="time_AdPropilenInicioAgit">Inició agitación:</label>
+												<div class="input-group">
+													<input class="form-control" id="time_AdPropilenInicioAgit" name="time_AdPropilenInicioAgit">
+													<div class="input-group-addon">
+														hrs
+													</div>
+												</div>
+
+
+
+												<label class="label-control" for="time_AdPropilenTerminoAgit">Término de agitación:</label>
+												<div class="input-group">
+													<input class="form-control" id="time_AdPropilenTerminoAgit" name="time_AdPropilenTerminoAgit">
+													<div class="input-group-addon">
+														hrs
+													</div>
+												</div>
+
+
+
+												<label class="label-control" for="time_AdPropilenInicioAgit">Velocidad de agitación:</label>
+												<div class="input-group">
+													<input class="form-control" id="time_AdPropilenInicioAgit" name="time_AdPropilenInicioAgit">
+													<div class="input-group-addon">
+														hrs
+													</div>
+												</div>
+
+
+
+												<label class="label-control" for="number_AdPropilenTempAgit">Temperatura</label>
+												<div class="input-group">
+													<input class="form-control" id="number_AdPropilenTempAgit" name="number_AdPropilenTempAgit">
+													<div class="input-group-addon">
+														°C
+													</div>
+												</div>
+											</div>
+
+
+
+
+
+
+
+
+											<div class="autorizacion fs-md-space">
+
+
+
+												<div class="row clearfix"> 
+													<div class="col-sm-6 col-md-6"> 
+														<div class="thumbnail btn btn-default modal-call"  data-target=""> 
+															<div class="caption text-center"> <h3>Realizó </h3> <p data-result="">... </p><p data-date=""></p> 
+															</div> 
+														</div> 
+													</div> 
+
+													<div class="col-sm-6 col-md-6"> 
+														<div class="thumbnail btn btn-default modal-call"  data-target=""> 
+															<div class="caption text-center"> <h3> Supervisó </h3> <p data-result="">... </p><p data-date=""></p> 
+															</div> 
+														</div> 
+													</div> 
+
+												</div> 
+
+											</div>
+
+										</div>
+									</div>
+									</div>
+									<div class="panel panel-default">
+										<div class="panel-heading">
+											<h4 class="panel-title">
+
+												<div class="row"> 
+													<div class="col-md-1 col-sm-1 col-xs-1"> 
+														<a class="fluigicon fluigicon-info-sign" role="button" rel="popover" data-title="Info" data-content="Materias primas surtidas vs OP" data-placement="top">
+														</a> 
+													</div> 
+													<a role="button" data-toggle="collapse" data-parent="#mezcladoAcordeon" href="#mezcladoA14" aria-expanded="true" aria-controls="mezcladoA14" > 
+
+														<div class="col-md-1 col-sm-1 col-xs-1"> 
+
+														</div> 
+														<div class="col-md-7 col-sm-7 col-xs-7"> Verificar Ph
+														</div> 
+														<div class="col-md-3 col-sm-3 col-xs-3"> 
+														</div> 
+
+
+
+													</a> 
+
+												</div>            
+
+
+											</h4>
+										</div>
+										<div id="mezcladoA14" class="panel-collapse collapse">
+											<div class="panel-body">
+												Al término del punto anterior verificar el pH de la solución con el potenciómetro. Solicitar la verificación del pH al inspector.   
+												<table class="table">
+<tr>
+	<th>Parámetro</th>
+	<th>Especificación</th>
+
+</tr>
+<tr>
+	<td>PH</td>
+	<td>3.0  -4.0</td>
+</tr>
+</table>
+
+
+
+<label class="label-control" for="number_ResObtPH">Resultado obtenido</label>
+
+<input class="form-control" id="number_ResObtPH" name="number_ResObtPH"/>
+
+
+
+<div class="autorizacion fs-md-space">
+	   
+
+
+<div class="row clearfix"> 
+<div class="col-sm-4 col-md-4"> 
+<div class="thumbnail btn btn-default modal-call"  data-target=""> 
+<div class="caption text-center"> <h3>Realizó </h3> <p data-result="">... </p><p data-date=""></p> 
+</div> 
+</div> 
+</div> 
+
+<div class="col-sm-4 col-md-4"> 
+<div class="thumbnail btn btn-default modal-call"  data-target=""> 
+<div class="caption text-center"> <h3> Supervisó </h3> <p data-result="">... </p><p data-date=""></p> 
+</div> 
+</div> 
+</div> 
+<div class="col-sm-4 col-md-4"> 
+<div class="thumbnail btn btn-default modal-call"  data-target=""> 
+<div class="caption text-center"> <h3>Verificó</h3> <p data-result="">... </p> <p data-date=""></p>
+</div> 
+</div> 
+</div> 
+</div> 
+
+</div>
+<button>Ajustar</button>
+
+												##En caso de ser necesario ajustar el pH de la solución, hacerlo con ácido clorhídrico al 10 % p/p y mezclar durante 10 min.
+												• Cantidad total agregada de ácido clorhídrico a la mezcla  mL
+												<div class="autorizacion fs-md-space">
+	   
+
+
+<div class="row clearfix"> 
+<div class="col-sm-4 col-md-4"> 
+<div class="thumbnail btn btn-default modal-call"  data-target=""> 
+<div class="caption text-center"> <h3>Realizó </h3> <p data-result="">... </p><p data-date=""></p> 
+</div> 
+</div> 
+</div> 
+
+<div class="col-sm-4 col-md-4"> 
+<div class="thumbnail btn btn-default modal-call"  data-target=""> 
+<div class="caption text-center"> <h3> Supervisó </h3> <p data-result="">... </p><p data-date=""></p> 
+</div> 
+</div> 
+</div> 
+
+</div> 
+
+</div>
+											</div>
+										</div>
+									</div>
+									<div class="panel panel-default">
+										<div class="panel-heading">
+											<h4 class="panel-title">
+
+												<div class="row"> 
+													<div class="col-md-1 col-sm-1 col-xs-1"> 
+														<a class="fluigicon fluigicon-info-sign" role="button" rel="popover" data-title="Info" data-content="Materias primas surtidas vs OP" data-placement="top">
+														</a> 
+													</div> 
+													<a role="button" data-toggle="collapse" data-parent="#mezcladoAcordeon" href="#mezcladoA15" aria-expanded="true" aria-controls="mezcladoA15" > 
+
+
+														<div class="col-md-1 col-sm-1 col-xs-1"> 
+
+														</div> 
+														<div class="col-md-7 col-sm-7 col-xs-7"> Adicionar Bitartrato
+														</div> 
+														<div class="col-md-3 col-sm-3 col-xs-3"> 
+														</div> 
+
+
+
+													</a> 
+
+												</div>            
+
+
+											</h4>
+										</div>
+										<div id="mezcladoA15" class="panel-collapse collapse">
+											<div class="panel-body">
+												Una vez obtenido el pH especificado, adicionar <span data-target=""></span> g de bitartrato 
+												de norepinefrina al tanque de 60 L a una altura cercana al nivel superior de la solución, a manera que deslice el activo para generar la menor cantidad de
+												principio activo esparcido y agitar durante 10 min a 500 rpm. Utilizar mascarilla de respiración al momento de la adición del activo.
+												<div class="form-group">
+													<label class="label-control" for="time_AdBitartratoAgit">Inició agitación:</label>
+													<div class="input-group">
+														<input class="form-control" id="time_AdBitartratoAgit" name="time_AdBitartratoAgit">
+														<div class="input-group-addon">
+															hrs
+														</div>
+													</div>
+
+
+
+													<label class="label-control" for="time_AdPropilenTerminoAgit">Término de agitación:</label>
+													<div class="input-group">
+														<input class="form-control" id="time_AdPropilenTerminoAgit" name="time_AdPropilenTerminoAgit">
+														<div class="input-group-addon">
+															hrs
+														</div>
+													</div>
+
+
+
+													<label class="label-control" for="time_AdBitartratoAgit">Velocidad de agitación:</label>
+													<div class="input-group">
+														<input class="form-control" id="time_AdBitartratoAgit" name="time_AdBitartratoAgit">
+														<div class="input-group-addon">
+															rpm
+														</div>
+													</div>
+													<div class="autorizacion fs-md-space">
+
+
+
+														<div class="row clearfix"> 
+															<div class="col-sm-4 col-md-4"> 
+																<div class="thumbnail btn btn-default modal-call"  data-target=""> 
+																	<div class="caption text-center"> <h3>Realizó </h3> <p data-result="">... </p><p data-date=""></p> 
+																	</div> 
+																</div> 
+															</div> 
+
+															<div class="col-sm-4 col-md-4"> 
+																<div class="thumbnail btn btn-default modal-call"  data-target=""> 
+																	<div class="caption text-center"> <h3> Supervisó </h3> <p data-result="">... </p><p data-date=""></p> 
+																	</div> 
+																</div> 
+															</div> 
+															<div class="col-sm-4 col-md-4"> 
+																<div class="thumbnail btn btn-default modal-call"  data-target=""> 
+																	<div class="caption text-center"> <h3>Verificó</h3> <p data-result="">... </p> <p data-date=""></p>
+																	</div> 
+																</div> 
+															</div> 
+														</div> 
+
+													</div>
+
+
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="panel panel-default">
+										<div class="panel-heading">
+											<h4 class="panel-title">
+
+												<div class="row"> 
+													<div class="col-md-1 col-sm-1 col-xs-1"> 
+														<a class="fluigicon fluigicon-info-sign" role="button" rel="popover" data-title="Info" data-content="Materias primas surtidas vs OP" data-placement="top">
+														</a> 
+													</div> 
+													<a role="button" data-toggle="collapse" data-parent="#mezcladoAcordeon" href="#mezcladoA16" aria-expanded="true" aria-controls="mezcladoA16" > 
+
+														<div class="col-md-1 col-sm-1 col-xs-1"> 
+
+														</div> 
+														<div class="col-md-7 col-sm-7 col-xs-7">Agregar restante de agua
+														</div> 
+														<div class="col-md-3 col-sm-3 col-xs-3"> 
+														</div> 
+
+
+
+													</a> 
+
+												</div>            
+
+
+											</h4>
+										</div>
+										<div id="mezcladoA16" class="panel-collapse collapse">
+											<div class="panel-body">
+												Al término del punto anterior, suspender la agitación. Agregar la cantidad restante de agua para la fabricación de inyectables inicialmente recolectada hasta alcanzar 56.5 kg de solución. Solicitar la revisión y verificación de peso por el supervisor y el inspector.
+												<div class="form-group">
+												    <label for="number_tempAguaFabInyAforo" class="control-label">Temperatura del agua para fabricación de inyectables en el aforo:</label>
+												    <div class="input-group">
+												    <input type="text" class="form-control"name= "number_tempAguaFabInyAforo" id="number_tempAguaFabInyAforo" placeholder="placeholder">
+												    <div class="input-group-addon">
+												    	°C
+												    </div>
+												    </div>
+												 </div>
+												    <div class="form-group">
+												    <label for="number_tempAguaFabInyAforo" class="control-label">Peso inicial:</label>
+												    <div class="input-group">
+												    <input type="text" class="form-control"name= "number_PesIniAguaFabInyAforo" id="number_PesIniAguaFabInyAforo" placeholder="placeholder">
+												    <div class="input-group-addon">
+												    	kg
+												    </div>
+												    </div>
+												 </div>
+												 					    <div class="form-group">
+												    <label for="number_PesIniAguaFabFinAforo" class="control-label">Peso final :</label>
+												    <div class="input-group">
+												    <input type="text" class="form-control"name= "number_PesIniAguaFabFinAforo" id="number_PesIniAguaFabFinAforo" placeholder="placeholder">
+												    <div class="input-group-addon">
+												    	kg
+												    </div>
+												    </div>
+												 </div>
+																						 					    <div class="form-group">
+												    <label for="number_AdAguaFabFinAforo" class="control-label">Cantidad de agua agregada:</label>
+												    <div class="input-group">
+												    <input type="text" class="form-control"name= "number_AdAguaFabFinAforo" id="number_AdAguaFabFinAforo" placeholder="placeholder">
+												    <div class="input-group-addon">
+												    	kg
+												    </div>
+												    </div>
+												 </div>
+
+											
+
+												<div class="autorizacion fs-md-space">
+
+
+
+													<div class="row clearfix"> 
+														<div class="col-sm-4 col-md-4"> 
+															<div class="thumbnail btn btn-default modal-call"  data-target=""> 
+																<div class="caption text-center"> <h3>Realizó </h3> <p data-result="">... </p><p data-date=""></p> 
+																</div> 
+															</div> 
+														</div> 
+
+														<div class="col-sm-4 col-md-4"> 
+															<div class="thumbnail btn btn-default modal-call"  data-target=""> 
+																<div class="caption text-center"> <h3> Supervisó </h3> <p data-result="">... </p><p data-date=""></p> 
+																</div> 
+															</div> 
+														</div> 
+														<div class="col-sm-4 col-md-4"> 
+															<div class="thumbnail btn btn-default modal-call"  data-target=""> 
+																<div class="caption text-center"> <h3>Verificó</h3> <p data-result="">... </p> <p data-date=""></p>
+																</div> 
+															</div> 
+														</div> 
+													</div> 
+
+												</div>
+
+											</div>
+										</div>
+										</div>
+									<div class="panel panel-default">
+										<div class="panel-heading">
+											<h4 class="panel-title">
+
+												<div class="row"> 
+													<div class="col-md-1 col-sm-1 col-xs-1"> 
+														<a class="fluigicon fluigicon-info-sign" role="button" rel="popover" data-title="Info" data-content="Materias primas surtidas vs OP" data-placement="top">
+														</a> 
+													</div> 
+													<a role="button" data-toggle="collapse" data-parent="#mezcladoAcordeon" href="#mezcladoA17" aria-expanded="true" aria-controls="mezcladoA17" > 
+
+														<div class="col-md-1 col-sm-1 col-xs-1"> 
+
+														</div> 
+														<div class="col-md-7 col-sm-7 col-xs-7"> Agitar durante 10 min
+														</div> 
+														<div class="col-md-3 col-sm-3 col-xs-3"> 
+														</div> 
+
+
+
+													</a> 
+
+												</div>            
+
+
+											</h4>
+										</div>
+										<div id="mezcladoA17" class="panel-collapse collapse">
+											<div class="panel-body">
+												Al término del punto anterior, agitar durante 10 minutos a 500 rpm.
+
+												<div class="form-group">
+													<label class="label-control" for="time_AdBitartratoAgit">Inició agitación:</label>
+													<div class="input-group">
+														<input class="form-control" id="time_AdBitartratoAgit" name="time_AdBitartratoAgit">
+														<div class="input-group-addon">
+															hrs
+														</div>
+													</div>
+
+
+
+													<label class="label-control" for="time_AdPropilenTerminoAgit">Término de agitación:</label>
+													<div class="input-group">
+														<input class="form-control" id="time_AdPropilenTerminoAgit" name="time_AdPropilenTerminoAgit">
+														<div class="input-group-addon">
+															hrs
+														</div>
+													</div>
+
+
+
+													<label class="label-control" for="time_AdBitartratoAgit">Velocidad de agitación:</label>
+													<div class="input-group">
+														<input class="form-control" id="time_AdBitartratoAgit" name="time_AdBitartratoAgit">
+														<div class="input-group-addon">
+															rpm
+														</div>
+													</div>
+												
+
+													</div>
+
+													
+										
+
+												<div class="autorizacion fs-md-space">
+
+
+
+													<div class="row clearfix"> 
+														<div class="col-sm-4 col-md-4"> 
+															<div class="thumbnail btn btn-default modal-call"  data-target=""> 
+																<div class="caption text-center"> <h3>Realizó </h3> <p data-result="">... </p><p data-date=""></p> 
+																</div> 
+															</div> 
+														</div> 
+
+														<div class="col-sm-4 col-md-4"> 
+															<div class="thumbnail btn btn-default modal-call"  data-target=""> 
+																<div class="caption text-center"> <h3> Supervisó </h3> <p data-result="">... </p><p data-date=""></p> 
+																</div> 
+															</div> 
+														</div> 
+														<div class="col-sm-4 col-md-4"> 
+															<div class="thumbnail btn btn-default modal-call"  data-target=""> 
+																<div class="caption text-center"> <h3>Verificó</h3> <p data-result="">... </p> <p data-date=""></p>
+																</div> 
+															</div> 
+														</div> 
+													</div> 
+
+												</div>
+
+											</div>
+										</div>
+									</div>
+									<div class="panel panel-default">
+										<div class="panel-heading">
+											<h4 class="panel-title">
+
+												<div class="row"> 
+													<div class="col-md-1 col-sm-1 col-xs-1"> 
+														<a class="fluigicon fluigicon-info-sign" role="button" rel="popover" data-title="Info" data-content="Materias primas surtidas vs OP" data-placement="top">
+														</a> 
+													</div> 
+													<a role="button" data-toggle="collapse" data-parent="#mezcladoAcordeon" href="#mezcladoA18" aria-expanded="true" aria-controls="mezcladoA18" > 
+
+														<div class="col-md-1 col-sm-1 col-xs-1"> 
+
+														</div> 
+														<div class="col-md-7 col-sm-7 col-xs-7"> Verificar peso
+														</div> 
+														<div class="col-md-3 col-sm-3 col-xs-3"> 
+														</div> 
+
+
+
+													</a> 
+
+												</div>            
+
+
+											</h4>
+										</div>
+										<div id="mezcladoA18" class="panel-collapse collapse">
+											<div class="panel-body">
+												Al término del punto anterior, verificar el peso del producto obtenido, restando al peso bruto del tanque con solución y tapa menos el peso de la tara inicial del tanque:
+												<fieldset>
+													<legend>Tanque de 60 L</legend>
+													    <label for="number_PesoBrutoTanq" class="control-label">Peso Bruto </label>
+													    <input type="text" class="form-control"name= "number_PesoBrutoTanq" id="number_PesoBrutoTanq" placeholder="placeholder">
+													    <label for="number_PesoTaraTanq" class="control-label">Peso Tara </label>
+													    <input type="text" class="form-control"name= "number_PesoTaraTanq" id="number_PesoTaraTanq" placeholder="placeholder">
+													    <label for="number_PesoNetoTanq" class="control-label">Peso Neto </label>
+													    <input type="text" class="form-control"name= "number_PesoNetoTanq" id="number_PesoNetoTanq" placeholder="placeholder">
+
+
+												</fieldset>
+												<div class="autorizacion fs-md-space">
+	   
+<div class="row clearfix"> 
+<div class="col-sm-3 col-md-3"> 
+<div class="thumbnail btn btn-default "  data-target=""> 
+<div class="caption text-center"> <h3>Fecha</h3> <p data-result="">... </p> <p data-date=""></p>
+</div> 
+</div> 
+</div> 
+<div class="col-sm-3 col-md-3"> 
+<div class="thumbnail btn btn-default modal-call"  data-target=""> 
+<div class="caption text-center"> <h3>Realizó </h3> <p data-result="">... </p><p data-date=""></p> 
+</div> 
+</div> 
+</div> 
+
+<div class="col-sm-3 col-md-3"> 
+<div class="thumbnail btn btn-default modal-call"  data-target=""> 
+<div class="caption text-center"> <h3> Supervisó </h3> <p data-result="">... </p><p data-date=""></p> 
+</div> 
+</div> 
+</div> 
+<div class="col-sm-3 col-md-3"> 
+<div class="thumbnail btn btn-default modal-call"  data-target=""> 
+<div class="caption text-center"> <h3>Verificó</h3> <p data-result="">... </p> <p data-date=""></p>
+</div> 
+</div> 
+</div> 
+
+</div> 
+
+</div>
+
+
+
+											</div>
+										</div>
+									</div>
+
+
+<div class="panel panel-default">
+										<div class="panel-heading">
+											<h4 class="panel-title">
+
+												<div class="row"> 
+													<div class="col-md-1 col-sm-1 col-xs-1"> 
+														<a class="fluigicon fluigicon-info-sign" role="button" rel="popover" data-title="Info" data-content="Materias primas surtidas vs OP" data-placement="top">
+														</a> 
+													</div> 
+													<a role="button" data-toggle="collapse" data-parent="#mezcladoAcordeon" href="#mezcladoA18A" aria-expanded="true" aria-controls="mezcladoA18A" > 
+
+														<div class="col-md-1 col-sm-1 col-xs-1"> 
+
+														</div> 
+														<div class="col-md-7 col-sm-7 col-xs-7"> Solicitar inspección
+														</div> 
+														<div class="col-md-3 col-sm-3 col-xs-3"> 
+														</div> 
+
+
+
+													</a> 
+
+												</div>            
+
+
+											</h4>
+										</div>
+										<div id="mezcladoA18A" class="panel-collapse collapse">
+											<div class="panel-body">
+												Solicitar a inspección el muestreo de 50 mL del producto a granel para enviar a
+												control de la calidad.
+
+												<div class="form-group">
+												<label class="label-control" for="number_CantMuestra">Cantidad muestreada:</label>
+												<div class="input-group">
+												<input class="form-control" id="number_CantMuestra" name="number_CantMuestra">
+												<div class="input-group-addon">
+												mL
+												</div>
+												</div>
+												</div>
+												
+
+<div class="autorizacion fs-md-space">
+	   
+<div class="row clearfix"> 
+<div class="col-sm-4 col-md-4"> 
+<div class="thumbnail btn btn-default modal-call"  data-target=""> 
+<div class="caption text-center"> <h3>Verificó</h3> <p data-result="">... </p> <p data-date=""></p>
+</div> 
+</div> 
+</div>
+<div class="col-sm-4 col-md-4"> 
+<div class="thumbnail btn btn-default modal-call"  data-target=""> 
+<div class="caption text-center"> <h3>Realizó </h3> <p data-result="">... </p><p data-date=""></p> 
+</div> 
+</div> 
+</div> 
+
+<div class="col-sm-4 col-md-4"> 
+<div class="thumbnail btn btn-default modal-call"  data-target=""> 
+<div class="caption text-center"> <h3> Supervisó </h3> <p data-result="">... </p><p data-date=""></p> 
+</div> 
+</div> 
+</div> 
+ 
+</div> 
+
+</div>
+
+
+											</div>
+										</div>
+									</div>
+
+
+
+									
+
+
+
+									<div class="panel panel-default">
+										<div class="panel-heading">
+											<h4 class="panel-title">
+
+												<div class="row"> 
+													<div class="col-md-1 col-sm-1 col-xs-1"> 
+														<a class="fluigicon fluigicon-info-sign" role="button" rel="popover" data-title="Info" data-content="Materias primas surtidas vs OP" data-placement="top">
+														</a> 
+													</div> 
+													<a role="button" data-toggle="collapse" data-parent="#mezcladoAcordeon" href="#mezcladoA19" aria-expanded="true" aria-controls="mezcladoA19" > 
+
+														<div class="col-md-1 col-sm-1 col-xs-1"> 
+
+														</div> 
+														<div class="col-md-7 col-sm-7 col-xs-7">    Solicitud fisico quimicos
+														</div> 
+														<div class="col-md-3 col-sm-3 col-xs-3"> 
+														</div> 
+
+
+
+													</a> 
+
+												</div>            
+
+
+											</h4>
+										</div>
+										<div id="mezcladoA19" class="panel-collapse collapse">
+											<div class="panel-body">
+												Solicitar al personal de fisicoquimicos la liberación del producto con los
+												siguientes parámetros de proceso:  
+	<table class="table">
+	<tr>
+		<th>Parámetros</th>
+		<th>Valor Obtenido</th>
+
+	</tr>
+	<tr>
+	<td>Densidad</td>
+	<td>    
+	    <input  class="form-control"   type ="number"  name= "number_DensidadProductoFQ" id="number_DensidadProductoFQ" placeholder=""></td>
+	</tr>
+	<tr>
+	<td>Volumen /Pesado de llenado</td>
+	<td>   
+	    <input  class="form-control"  type ="number"  name= "number_VolPesLlenadoFQ" id="number_VolPesLlenadoFQ" placeholder=""></td>
+	</tr>
+	<tr>
+	<td>pH(7-8)</td>
+	<td>   
+	    <input   type ="number"  class="form-control"  name= "number_pHObtenidoFQ" id="number_pHObtenidoFQ" placeholder=""></td>
+	</tr>
+
+</table>
+
+<div class="autorizacion fs-md-space">
+	   
+<div class="row clearfix"> 
+
+
+<div class="col-sm-6 col-md-6"> 
+<div class="thumbnail btn btn-default modal-call"  data-target=""> 
+<div class="caption text-center"> <h3> Supervisó </h3> <p data-result="">... </p><p data-date=""></p> 
+</div> 
+</div> 
+</div> 
+<div class="col-sm-6 col-md-6"> 
+<div class="thumbnail btn btn-default modal-call"  data-target=""> 
+<div class="caption text-center"> <h3>Verificó</h3> <p data-result="">... </p> <p data-date=""></p>
+</div> 
+</div> 
+</div> 
+</div> 
+
+</div>
+
+											</div>
+										</div>
+									</div>
+									<div class="panel panel-default">
+										<div class="panel-heading">
+											<h4 class="panel-title">
+
+												<div class="row"> 
+													<div class="col-md-1 col-sm-1 col-xs-1"> 
+														<a class="fluigicon fluigicon-info-sign" role="button" rel="popover" data-title="Info" data-content="Materias primas surtidas vs OP" data-placement="top">
+														</a> 
+													</div> 
+													<a role="button" data-toggle="collapse" data-parent="#mezcladoAcordeon" href="#mezcladoA20" aria-expanded="true" aria-controls="mezcladoA20" > 
+
+														<div class="col-md-1 col-sm-1 col-xs-1"> 
+
+														</div> 
+														<div class="col-md-7 col-sm-7 col-xs-7"> Termino de proceso
+														</div> 
+														<div class="col-md-3 col-sm-3 col-xs-3"> 
+														</div> 
+
+
+
+													</a> 
+
+												</div>            
+
+
+											</h4>
+										</div>
+										<div id="mezcladoA20" class="panel-collapse collapse">
+											<div class="panel-body">
+												Tapar el tanque de 60 L y anotar fecha y hora de término del proceso de
+												mezclado.
+
+											</div>
+										</div>
+									</div>
+									<div class="panel panel-default">
+										<div class="panel-heading">
+											<h4 class="panel-title">
+
+												<div class="row"> 
+													<div class="col-md-1 col-sm-1 col-xs-1"> 
+														<a class="fluigicon fluigicon-info-sign" role="button" rel="popover" data-title="Info" data-content="Materias primas surtidas vs OP" data-placement="top">
+														</a> 
+													</div> 
+													<a role="button" data-toggle="collapse" data-parent="#mezcladoAcordeon" href="#mezcladoA21" aria-expanded="true" aria-controls="mezcladoA21" > 
+
+														<div class="col-md-1 col-sm-1 col-xs-1"> 
+
+														</div> 
+														<div class="col-md-7 col-sm-7 col-xs-7">Analisis valoración a granel
+														</div> 
+														<div class="col-md-3 col-sm-3 col-xs-3"> 
+														</div> 
+
+
+
+													</a> 
+
+												</div>            
+
+
+											</h4>
+										</div>
+										<div id="mezcladoA21" class="panel-collapse collapse">
+											<div class="panel-body">
+												Solicitar el resultado del análisis de la valoración del granel al personal de
+												control de calidad. Cca-íi cfrp
+												PuIPMS (A5-iubiliNa) Analista: 10‘6rii Píen w-L. "ru
+												?(I-ODUC-fc.)   va 00 GTv
+												26. Al término del proceso, realizar el despeje y limpieza del área.
+												Hora:   hrs Fecha:
+
+
+
+
+												<div class="autorizacion fs-md-space">
+
+
+
+													<div class="row clearfix"> 
+														<div class="col-sm-4 col-md-4"> 
+															<div class="thumbnail btn btn-default modal-call"  data-target=""> 
+																<div class="caption text-center"> <h3>Realizó </h3> <p data-result="">... </p><p data-date=""></p> 
+																</div> 
+															</div> 
+														</div> 
+
+														<div class="col-sm-4 col-md-4"> 
+															<div class="thumbnail btn btn-default modal-call"  data-target=""> 
+																<div class="caption text-center"> <h3> Supervisó </h3> <p data-result="">... </p><p data-date=""></p> 
+																</div> 
+															</div> 
+														</div> 
+														<div class="col-sm-4 col-md-4"> 
+															<div class="thumbnail btn btn-default modal-call"  data-target=""> 
+																<div class="caption text-center"> <h3>Verificó</h3> <p data-result="">... </p> <p data-date=""></p>
+																</div> 
+															</div> 
+														</div> 
+													</div> 
+
+												</div>   
+
+
+											</div>
+										</div>
+									</div>
+									<div class="panel panel-default">
+										<div class="panel-heading">
+											<h4 class="panel-title">
+
+												<div class="row"> 
+													<div class="col-md-1 col-sm-1 col-xs-1"> 
+														<a class="fluigicon fluigicon-info-sign" role="button" rel="popover" data-title="Info" data-content="Materias primas surtidas vs OP" data-placement="top">
+														</a> 
+													</div> 
+													<a role="button" data-toggle="collapse" data-parent="#mezcladoAcordeon" href="#mezcladoA22" aria-expanded="true" aria-controls="mezcladoA22" > 
+
+														<div class="col-md-1 col-sm-1 col-xs-1"> 
+
+														</div> 
+														<div class="col-md-7 col-sm-7 col-xs-7"> Despejar  área
+														</div> 
+														<div class="col-md-3 col-sm-3 col-xs-3"> 
+														</div> 
+
+
+
+													</a> 
+
+												</div>            
+
+
+											</h4>
+										</div>
+										<div id="mezcladoA22" class="panel-collapse collapse">
+											<div class="panel-body">
+												Al término del proceso, realizar el despeje y limpieza del área.
+												Hora:   hrs Fecha:
+
+												<div class="autorizacion fs-md-space">
+
+
+
+													<div class="row clearfix"> 
+														<div class="col-sm-4 col-md-4"> 
+															<div class="thumbnail btn btn-default modal-call"  data-target=""> 
+																<div class="caption text-center"> <h3>Realizó </h3> <p data-result="">... </p><p data-date=""></p> 
+																</div> 
+															</div> 
+														</div> 
+
+														<div class="col-sm-4 col-md-4"> 
+															<div class="thumbnail btn btn-default modal-call"  data-target=""> 
+																<div class="caption text-center"> <h3> Supervisó </h3> <p data-result="">... </p><p data-date=""></p> 
+																</div> 
+															</div> 
+														</div> 
+														<div class="col-sm-4 col-md-4"> 
+															<div class="thumbnail btn btn-default modal-call"  data-target=""> 
+																<div class="caption text-center"> <h3>Verificó</h3> <p data-result="">... </p> <p data-date=""></p>
+																</div> 
+															</div> 
+														</div> 
+													</div> 
+
+												</div> 
+											</div>
+										</div>
+									</div>
+									<div class="panel panel-default">
+										<div class="panel-heading">
+											<h4 class="panel-title">
+
+												<div class="row"> 
+													<div class="col-md-1 col-sm-1 col-xs-1"> 
+														<a class="fluigicon fluigicon-info-sign" role="button" rel="popover" data-title="Info" data-content="Materias primas surtidas vs OP" data-placement="top">
+														</a> 
+													</div> 
+													<a role="button" data-toggle="collapse" data-parent="#mezcladoAcordeon" href="#mezcladoA23" aria-expanded="true" aria-controls="mezcladoA23" > 
+
+														<div class="col-md-1 col-sm-1 col-xs-1"> 
+
+														</div> 
+														<div class="col-md-7 col-sm-7 col-xs-7"> Materias primas surtidas vs OP
+														</div> 
+														<div class="col-md-3 col-sm-3 col-xs-3"> 
+														</div> 
+
+
+
+													</a> 
+
+												</div>            
+
+
+											</h4>
+										</div>
+										<div id="mezcladoA23" class="panel-collapse collapse">
+											<div class="panel-body">
+												Al terminar el mezclado anexar la documentación correspondiente al expediente de producción (etiquetas, gráficas de control, certificados, etc.).
+
+
+												<div class="autorizacion fs-md-space">
+
+
+
+													<div class="row clearfix"> 
+														<div class="col-sm-4 col-md-4"> 
+															<div class="thumbnail btn btn-default modal-call"  data-target=""> 
+																<div class="caption text-center"> <h3>Realizó </h3> <p data-result="">... </p><p data-date=""></p> 
+																</div> 
+															</div> 
+														</div> 
+
+														<div class="col-sm-4 col-md-4"> 
+															<div class="thumbnail btn btn-default modal-call"  data-target=""> 
+																<div class="caption text-center"> <h3> Supervisó </h3> <p data-result="">... </p><p data-date=""></p> 
+																</div> 
+															</div> 
+														</div> 
+
+													</div> 
+
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="panel panel-default">
+										<div class="panel-heading">
+											<h4 class="panel-title">
+
+												<div class="row"> 
+													<div class="col-md-1 col-sm-1 col-xs-1"> 
+														<a class="fluigicon fluigicon-info-sign" role="button" rel="popover" data-title="Info" data-content="Materias primas surtidas vs OP" data-placement="top">
+														</a> 
+													</div> 
+													<a role="button" data-toggle="collapse" data-parent="#mezcladoAcordeon" href="#mezcladoA24" aria-expanded="true" aria-controls="mezcladoA24" > 
+
+														<div class="col-md-1 col-sm-1 col-xs-1"> 
+
+														</div> 
+														<div class="col-md-7 col-sm-7 col-xs-7"> Resultado
+														</div> 
+														<div class="col-md-3 col-sm-3 col-xs-3"> 
+														</div> 
+
+
+
+													</a> 
+
+												</div>            
+
+
+											</h4>
+										</div>
+										<div id="mezcladoA24" class="panel-collapse collapse">
+											<div class="panel-body">
+												Calcular el rendimiento obtenido, el cual debe estar entre el 95% y 100%. Si el rendimiento se encuentra fuera de especificación, anexar el reporte de desviación correspondiente.
+												I. Cantidad teórica:    56.50   kg
+												II. Cantidad final obtenida (a — b):    kg
+												Dónde:
+												a)  Peso bruto del tanque (pesar después de la toma de muestra)
+												b)  Peso de la tara del tanque
+												III. Cantidad enviada para análisis de calidad:      kg.
+
+
+
+
+												Merma: 100 - % Rendimiento= 100 -               o
+
+
+
+
+												Vo.Bo. Fabricación  Vo.Bo. Aseguramiento de la Calidad
+
+											</div>
+										</div>
+									</div>
+
+
+
+
+
+	
+
+								</div>
+
+
+		
+
+
+
+							</form>
+						</div>
+					</div>
+				</body>
+				<script>
+
+				$(".autorizacion").find("input").hide();
+				$(".autorizacion").find("label").hide();
+					const jsonOrden={
+						tabla:{
+							completa:
+							[ ["nom_den_dist","nom_den_gene","nom_for_farm","nom_conc_lote"],
+							["nom_fec_fabr" ,"nom_per_cadu","date_fec_cadu","date_fec_emis"] ,
+							["nom_no_lote", "num_no_orde", "nom_reg_lote", "nom_cod_inte"]  ,
+							["nom_sustituye","num_tam_lote", "nom_cond_uso"]],
+							reducida: [ ["nom_den_dist","nom_for_farm","nom_conc_lote","nom_sustituye"],
+							["num_tam_lote" ,"nom_no_lote","nom_per_cadu","nom_reg_lote"]] }};
+
+
+							var tablaCompleta=jsonOrden.tabla["completa"];
+
+							$(".tableResult").html(createTable(tablaCompleta));
+							$("[data-toggle='tab']").click(function(){
+								
+								var navegacion=$(this).attr("href");
+								const navCompleto="#field_lista";
+								var tipoTabla;
+								if(navegacion==navCompleto){
+									
+									tipoTabla=jsonOrden.tabla["completa"];
+								
+
+								}else
+								
+								{ tipoTabla=jsonOrden.tabla["reducida"]; }
+
+
+								$(".tableResult").html(createTable(tipoTabla));
+
+							});
+
+
+							function createTable(datosTabla){
+
+
+								var tabla="<table class='table table-bordered'>";
+								var titulo,valorCampo,campoId;   
+								for (var i in datosTabla)
+								{
+
+									var row=datosTabla[i];
+									tabla+="<tr>";
+									for (var n in row)
+									{
+										campoId=row[n];
+
+										labelCampo= $("[for='"+campoId+"']").text();
+										valorCampo=$("#"+campoId).val();
+										tabla+="<th>";
+										tabla+=labelCampo;
+										tabla+="</th>";
+										tabla+="<td>";
+										tabla+=valorCampo;
+										tabla+="</td>";
+
+									}
+									tabla+="</tr>";
+
+								}
+								tabla+="</table>";
+								
+								return tabla;
+							}
+
+
+
+
+							var idModalCall="";
+
+							function revisarPass(grupo,password){
+								var fields=[];
+								fields.push(grupo);
+								fields.push(password);
+
+								try {
+
+									var dataset = DatasetFactory.getDataset("dsCheckPass",fields,null,null);
+									return showDataset(dataset);
+
+								} catch(erro) {
+									console.log("Error"+erro);
+								}	
+
+								return null;
+							}
+
+
+
+							function showDataset(dataset) {
+
+		//<table><tr><th>Usuario</th><th>Nombre</th><th>Respuesta</th></tr>
+		//       <tr><td>dankel.pruebas</td><td>ok</td><td>Dankel Pruebas</td></tr></table>
+		var tabela = "<table>";
+		if(dataset.values.length==0)
+			return null;
+		if(dataset.values.length==1){
+			var row=dataset.values[0];
+			var usuario = row["Respuesta"];
+
+			return usuario;
+		}
+		if(dataset.values.length>1){
+
+			return false;
+
+		}
+    //Monta o cabeçalho
+
+}
+
+
+
+
+var modalActive;
+
+
+var grupo="";
+$("body").on("click",".modal-call",function(){
+	if(! $(".modal-call").hasClass("active")){
+		
+		modalActive=$(this);
+		idModalCall=$(this).attr("data-result");
+		var idUsuario=$(this).attr("data-target");
+
+		grupo= $("#"+idUsuario).val();			
+		var myModal  = FLUIGC.modal({
+			title: 'Ingrese contraseña',
+			content: '<div class="form-group"><label for="response-modal" class="control-label text-center" >Contraseña para '+grupo+'</label><input type="password" class="form-control" id="response-modal"></div>',
+			id: 'fluig-modal',
+			actions: [{
+				'label': 'Continuar',
+				'bind': 'data-save-modal'
+				
+			},{
+				'label': 'Cancelar',
+				'bind': 'data-cancel-modal',
+				'autoClose': true
+			}]
+		}, function(err, data) {
+
+			
+			if(err) {
+        // do error handling
+    } else {
+
+    	$("body").find("#response-modal").focus();
+    }
+});
+
+		
+
+	}
+
+
+});
+$("body").on("click","[data-save-modal]",function(){
+
+
+
+	if($(this).attr("data-save-modal")==""){
+
+		$(".modal-body").find("input").each(function(){
+			
+			var respuesta= revisarPass(grupo,$(this).val());
+			if(respuesta){
+
+				$(".modal-body").find(".form-group").addClass("has-success");
+				console.log(idModalCall);
+				$("#"+idModalCall).val(respuesta);
+				modalActive.find("[data-result]").text(respuesta);
+				modalActive.addClass("alert alert-success");
+				modalActive.removeClass("btn btn-default modal-call");
+
+
+				$(".autorizacion").each(function (){
+					var count=0;
+					$(this).find(".modal-call").each(function(){
+
+						++count ;
+
+
+					});
+					if((!$(this).hasClass("pass")) && count==0){
+						$(this).addClass("pass");
+						$(this).closest(".panel").next(".panel").find("a").trigger("click");
+					}
+
+
+
+				});
+				$("[data-cancel-modal]").trigger("click");
+
+
+			}else{
+
+				var icon= '<span class="fluigicon fluigicon-warning-sign form-control-feedback"></span>';
+				var $modalBody=$(".modal-body").find(".form-group");
+				var textoError=$modalBody.after("<p>Contraseña incorrecta</p>").next().fadeOut(1400);
+				var $addState=$modalBody.addClass("has-error has-feedback")
+				var $messageError=$modalBody.find("input").after(icon);
+
+			}
+
+		});
+
+}
+});
+
+
+
+
+
+$(document).ready(function(){
+	FLUIGC.popover('.bs-docs-popover-click',{ trigger: 'click', placement: 'auto'});
+
+	show();
+
+	function setSelectedZoomItem(selectedItem) {
+		console.log("setSelectedZoomItem");
+		$("#colleague_zoom1").val(  selectedItem["colleagueName"] );
+	}
+});
+
+$(".adicionarLote").click(function(){
+	$("#Lote2").toggleClass("hide");
+	$(".instrucciones").toggleClass("hide");
+	show();
+
+});
+
+
+FLUIGC.switcher.initAll('.list-group');
+function show(){
+
+	var $Boton=$(".adicionarLote");
+	const aniade="Añadir Lote";
+	const retira="Retirar Lote";
+
+	if($("#Lote2").hasClass("hide")){
+
+		$Boton.text(aniade);
+	}
+	else
+		$Boton.text(retira);
+
+}
+
+
+
+if($("#horaInicioMezclado").val().trim()=="")
+{
+	var onlyTime = FLUIGC.calendar('#horaInicioMezclado', {
+
+		pickDate: false,
+		pickTime: true
+	});
+	onlyTime.setDate(onlyTime.getDate());
+
+}
+$("#horaInicioMezclado").attr("readonly","true");
+if($("#fechaInicioMezclado").val().trim()=="")
+{
+	var onlyDate = FLUIGC.calendar('#fechaInicioMezclado', {
+
+		pickDate: true,
+		pickTime: false
+	});
+	onlyDate.setDate(onlyTime.getDate());
+$("#fechaInicioMezclado").attr("readonly","true");
+}
+
+
+
+var bitacora_actual;
+var bitacora_numero=-1;
+var tableName;
+$("#fieldDosificado").on("click",".showModal",function(){
+	var count=$("table [tablename = "+tableName+" ]").find("tr").last().find("input").attr("id");
+		
+
+
+					
+		if(count&&count.indexOf("___")>0){
+
+			count=count.split("___")[1];
+			++count;
+		}else
+		count=1;
+
+		bitacora_actual=$(this);
+		
+		 tableName=$(this).attr("data-target");
+		var limit=$(this).attr("data-limit");
+
+
+		var myModal  = FLUIGC.modal({
+			title: 'Ingrese Cantidades',
+			content: '<div class="form-group"><label for ="textMuestra" class="label-control">Muestra</label> <input type="number" data-type="contador" name="textMuestra" id="textMuestra" class="form-control"></div><div class="form-group"><label for ="PesoBruto" class="label-control">Peso Bruto(g)</label><input type="number" name="PesoBruto" id="PesoBruto" class="form-control"> </div><div class="form-group"><label for ="PesoNeto" class="label-control"> Peso Neto(g)</label><input type="number" name="PesoNeto" id="PesoNeto" class="form-control" > </div>',
+			id: 'bitacoraMuestras',
+			actions: [{
+				'label': 'añadir',
+				'bind': 'data-add-modal'
+				
+			},{
+				'label': 'Cancelar',
+				'bind': 'data-cancel-modal',
+				'autoClose': true
+			}]
+		}, function(err, data) {
+
+			
+			if(err) {
+        // do error handling
+    } else {
+    	$("body").find("#bitacoraMuestras input").each(function(){
+var atributo=$(this).attr("data-type");
+if (atributo=="contador")
+{$(this).val(count)}
+});
+
+    	$("body").find("#textMuestra").focus();
+    }
+});
+
+
+
+});
+
+
+$("body").on("click","#bitacoraMuestras [data-add-modal]",function(){
+
+			
+
+
+var validez=true;
+var $atributo;
+$("body").find("#bitacoraMuestras input").each(function(){
+	var atributo=$(this).attr("data-type");
+if (atributo=="contador")
+{$atributo=$(this)}
+
+		if($(this).val().trim()=="")
+			validez= false;
+
+
+ 
+	});
+
+if(validez){
+
+
+		addTableName(tableName);	
+
+		var count=0;
+		var tableLast=$("table [tablename = "+tableName+" ]").find("tr").last();
+var countId=tableLast.find("input").attr("id");
+
+		if(countId&&countId.indexOf("___")>0){
+
+			count=parseInt(countId.split("___")[1]);
+			count=count+1;
+		}else 
+		count=1;
+		
+
+
+
+		$("body").find("#bitacoraMuestras input").each(function(){
+
+
+tableLast.find("input[id*='"+$(this).attr("id") +"']").val($(this).val());
+$(this).val("");
+ 
+	});
+		$atributo.val(count);
+
+}
+
+
+
+});
+
+/////////////////////////////////////////////////////
+
+$("#fieldEsterilizacion").on("click",".showModal",function(){
+
+
+		bitacora_actual=$(this);
+		
+		 tableName=$(this).attr("data-target");
+		var limit=$(this).attr("data-limit");
+
+
+		var myModal  = FLUIGC.modal({
+			title: 'Ingrese Cantidades',
+			content: '<div class="form-group"> <div class="row disabled"><div class="col-md-6  col-sm-6 col-xs-6"><label for="date_cont_proceso" class="control-label">Fecha</label> <input type="text" data-type="date" name="date_cont_proceso" id="date_cont_proceso" class="form-control" readonly></div><div class="col-md-6  col-sm-6 col-xs-6"> <label for="time_cont_proceso"  class="control-label">Hora</label> <input type="text" data-type="hour" name="time_cont_proceso" id="time_cont_proceso" class="form-control" readonly></div></div> <label for="number_ctrl_muestra1" class="control-label">Muestra 1 (g)</label> <input type="number" name="number_ctrl_muestra1" id="number_ctrl_muestra1" data-target="promediar" class="form-control" > <label for="number_ctrl_muestra2" class="control-label">Muestra 2 (g)</label> <input type="number" name="number_ctrl_muestra2" id="number_ctrl_muestra2" data-target="promediar" class="form-control" > <label for="number_ctrl_muestra3" class="control-label">Muestra 3 (g)</label> <input type="number" data-target="promediar" name="number_ctrl_muestra3" id="number_ctrl_muestra3" class="form-control" > <label for="number_ctrl_prom" class="control-label">Promedio (g)</label> <input type="number" name="number_ctrl_prom" data-target="promedio"id="number_ctrl_prom" class="form-control" > </div>',
+			id: 'bitacoraCtrlProceso',
+			actions: [{
+				'label': 'añadir',
+				'bind': 'data-add-modal'
+				
+			},{
+				'label': 'Cancelar',
+				'bind': 'data-cancel-modal',
+				'autoClose': true
+			}]
+		}, function(err, data) {
+
+			
+			if(err) {
+        // do error handling
+    } else {
+
+    	var contador=0;
+    	var inputPromedio=0;
+
+    	$("body").find("#bitacoraCtrlProceso input").each(function(){
+var atributo=$(this).attr("data-type");
+
+switch(atributo){
+case "date" : 
+	var dateMonth=["ENE","FEB","MAR","ABR","MAY","JUN","JUL","AGO","SEP","OCT","NOV","DIC"];
+	var d = new Date();
+	var year=d.getFullYear();
+	var month=dateMonth[d.getMonth()];
+	var day=d.getDate();
+	var resultadoFecha=year +"-"+ month+"-"+day ;
+
+$(this).val(resultadoFecha);
+break;
+case "hour" : 
+	
+	var d = new Date();
+	var hour=d.getHours();
+	var minute=d.getMinutes();
+	
+	var resultadoFecha=hour +":"+ minute;
+console.log("hour"+resultadoFecha);
+	$(this).val(resultadoFecha);
+break;
+
+}
+
+});
+
+    	
+    	$("body").find("#textMuestra input").first().focus();
+    }
+});
+
+
+
+});
+
+
+$("body").on("click","#bitacoraCtrlProceso [data-add-modal]",function(){
+
+			
+
+
+var validez=true;
+var $atributo;
+$("body").find("#bitacoraCtrlProceso input").each(function(){
+
+
+
+
+		if($(this).val().trim()=="")
+			validez= false;
+
+
+ 
+	});
+
+if(true){
+
+
+		addTableName(tableName);	
+
+		
+		var tableLast=$("table [tablename = "+tableName+" ]").find("tr").last();
+
+
+
+
+		$("body").find("#bitacoraCtrlProceso input").each(function(){
+var promediar=0;
+var cuenta=0;
+var atributo="";
+if($(this).attr("data-type"))
+ atributo=$(this).attr("data-type");
+console.log(atributo);
+
+
+if(atributo== "promediar")
+{
+	promediar+= $(this).val();
+	cuenta++;
+}
+if(atributo== "promedio")
+{
+	var resultado=promediar/cuenta;
+	$(this).val(resultado);
+}
+tableLast.find("input[id*='"+$(this).attr("id") +"']").val($(this).val());
+
+$(this).val("");
+
+switch(atributo){
+case "date" : 
+	var dateMonth=["ENE","FEB","MAR","ABR","MAY","JUN","JUL","AGO","SEP","OCT","NOV","DIC"];
+	var d = new Date();
+	var year=d.getFullYear();
+	var month=dateMonth[d.getMonth()];
+	var day=d.getDate();
+	var resultadoFecha=year +"-"+ month+"-"+day ;
+
+$(this).val(resultadoFecha);
+break;
+case  "hour" : 
+	
+	var d = new Date();
+	var hour=d.getHours();
+	var minute=d.getMinutes();
+	
+	var resultadoFecha=hour +":"+ minute;
+console.log("hour"+resultadoFecha);
+$(this).val(resultadoFecha);
+break;
+
+}
+
+
+	});
+		
+
+}
+
+
+
+});
+
+
+function addTableName(tablename){
+
+
+wdkAddChild(tablename);
+
+
+
+
+}
+
+
+</script>
+
+
+
+
+</html>

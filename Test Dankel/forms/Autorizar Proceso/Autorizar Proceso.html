@@ -1,0 +1,68 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="/portal/resources/style-guide/css/fluig-style-guide.min.css">
+<script src="/portal/resources/js/jquery/jquery.js"></script>
+<script src="/portal/resources/js/jquery/jquery-ui.min.js"></script>
+<script src="/portal/resources/js/mustache/mustache-min.js"></script>
+<script src="/portal/resources/style-guide/js/fluig-style-guide.min.js"></script>
+</head>
+<body>
+<div class="fluig-style-guide">
+        <form class="form">
+                  
+<!--  
+
+ENTRADA DE DATOS
+
+
+Fecha
+Código
+Descripcion de producto
+
+
+Boton de busqueda
+
+
+WEBSERVICE DE VERIFICACIÓN
+
+RESULTADO
+
+Si hay saldos
+    Cantidad de producto 
+Si no
+    Mensaje "Sin saldos"
+
+
+
+   -->
+
+
+
+    <label for="id_prod" class="control-label">Código</label>
+    <input type="text" class="form-control"name= "id_prod" id="id_prod" placeholder="placeholder">
+    <input      
+    type="zoom"
+                class="form-control"        
+    name="colleague_zoom1"  id="colleague_zoom1"
+    data-zoom="{            'datasetId':'colleague',            
+    'fields':[              {                   'field':'colleagueName',                   'label':'Nombre'               },{                 'field':'colleaguePK.colleagueId',                 'label':'Valoración %',                     'standard':'true',                  'search':'true'             }           ]       }" />
+    <input type="text" class="form-control"name= "text_desc_prod" id="text_desc_prod" placeholder="placeholder">
+    
+    <div class="resultado"></div>
+
+
+
+               </form>
+    </div>
+</body>
+    <script type="text/javascript">
+
+    
+      function setSelectedZoomItem(selectedItem) {
+        console.log("setSelectedZoomItem");
+        $("#colleague_zoom1").val(  selectedItem["colleagueName"] );
+    }
+
+
+    </script>
+</html>
